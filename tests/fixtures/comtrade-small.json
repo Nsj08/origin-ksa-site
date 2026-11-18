@@ -1,0 +1,73 @@
+{
+  "count": 4,
+  "error": "",
+  "data": [
+    {
+      "reporterCode": 682,
+      "flowCode": "M",
+      "freqCode": "A",
+      "refYear": 2024,
+      "cmdCode": "848180",
+      "aggrLevel": 6,
+      "partner2Code": 0,
+      "customsCode": "C00",
+      "motCode": 0,
+      "classificationCode": "H6",
+      "isOriginalClassification": true,
+      "partnerCode": 0,
+      "primaryValue": 100
+    },
+    {
+      "reporterCode": 682,
+      "flowCode": "M",
+      "freqCode": "A",
+      "refYear": 2024,
+      "cmdCode": "848180",
+      "aggrLevel": 6,
+      "partner2Code": 0,
+      "customsCode": "C00",
+      "motCode": 0,
+      "classificationCode": "H6",
+      "isOriginalClassification": true,
+      "isReported": true,
+      "isAggregate": false,
+      "partnerCode": 380,
+      "primaryValue": 40
+    },
+    {
+      "reporterCode": 682,
+      "flowCode": "M",
+      "freqCode": "A",
+      "refYear": 2024,
+      "cmdCode": "848180",
+      "aggrLevel": 6,
+      "partner2Code": 0,
+      "customsCode": "C00",
+      "motCode": 0,
+      "classificationCode": "H6",
+      "isOriginalClassification": true,
+      "isReported": true,
+      "isAggregate": false,
+      "partnerCode": 156,
+      "primaryValue": 35
+    },
+    {
+      "reporterCode": 682,
+      "flowCode": "M",
+      "freqCode": "A",
+      "refYear": 2024,
+      "cmdCode": "848180",
+      "aggrLevel": 6,
+      "partner2Code": 0,
+      "customsCode": "C00",
+      "motCode": 0,
+      "classificationCode": "H6",
+      "isOriginalClassification": true,
+      "isReported": true,
+      "isAggregate": false,
+      "partnerCode": 899,
+      "primaryValue": 25
+    }
+  ],
+  "fixture_marker": "ORIGINKSA_TEST_ONLY_TRADE"
+}

@@ -1,0 +1,11 @@
+ignoredOptionalDependencies:
+  - sharp
+  - lightningcss
+onlyBuiltDependencies:
+  - esbuild
+  - '@parcel/watcher'
+overrides:
+  'vite@8>lightningcss': '-'
+  # Temporary fork pending a suitable official Picomatch release.
+  'picomatch@2.3.2': 'npm:@ryotsu/picomatch@4.0.7-a'
+  'picomatch@4.0.7': 'npm:@ryotsu/picomatch@4.0.7-a'

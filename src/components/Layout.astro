@@ -1,0 +1,101 @@
+---
+import latin from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import arabic from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
+import arabicSemiBold from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2?url';
+import arabicBold from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2?url';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-sans/latin-700.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-700.css';
+import '../styles/global.css';
+import Brand from './Brand.astro';
+import { url, absolute, counterOrigin } from '../lib/site';
+import { t, type Language } from '../lib/ui';
+
+interface Props {
+  lang: Language;
+  path: string;
+  title: string;
+  description: string;
+  image?: string;
+  chooser?: boolean;
+  fallback?: boolean;
+}
+const { lang, path, title, description, image = 'og/site.png', chooser, fallback } = Astro.props;
+const other = lang === 'en' ? 'ar' : 'en';
+const pageTitle = `${title} | Origin KSA`;
+const localPath = (locale: Language) => `${locale}/${path}`;
+const href = (segment = '') => url(`${lang}/${segment}`);
+const canonical = absolute(chooser ? '' : localPath(lang));
+const csp = `default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self'${counterOrigin ? ' ' + counterOrigin : ''}; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; object-src 'none'`;
+const footerLinks = ['methods', 'questions', 'glossary', 'about', 'impact', 'changelog', 'privacy', 'terms'];
+---
+<!doctype html>
+<html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content={csp} />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {fallback && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={absolute(localPath('en'))} />
+    <link rel="alternate" hreflang="ar" href={absolute(localPath('ar'))} />
+    <link rel="alternate" hreflang="x-default" href={absolute(chooser ? '' : localPath('en'))} />
+    <link rel="icon" type="image/svg+xml" href={url('origin-mark.svg')} />
+    <link rel="alternate icon" href={url('favicon.ico')} />
+    <link rel="icon" type="image/png" sizes="16x16" href={url('favicon-16x16.png')} />
+    <link rel="icon" type="image/png" sizes="32x32" href={url('favicon-32x32.png')} />
+    <link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
+    <link rel="preload" as="font" href={lang === 'ar' ? arabic : latin} type="font/woff2" crossorigin="anonymous" />
+    {lang === 'ar' && path === 'browse/' && <>
+      <link rel="preload" as="font" href={arabicSemiBold} type="font/woff2" crossorigin="anonymous" media="(max-width: 640px)" />
+      <link rel="preload" as="font" href={arabicBold} type="font/woff2" crossorigin="anonymous" media="(max-width: 640px)" />
+    </>}
+    {chooser && <link rel="preload" as="font" href={arabic} type="font/woff2" crossorigin="anonymous" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={/^https?:/.test(image) ? image : absolute(image)} />
+    <meta property="og:locale" content={lang === 'ar' ? 'ar_SA' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip" href="#main" tabindex="0">{t(lang, 'common.skip')}</a>
+    {!chooser && <header class="site-header">
+      <div class="wrap header-inner">
+        <Brand href={href()} />
+        <nav aria-label={t(lang, 'nav.primary')} class="main-nav">
+          <a href={href('browse/')} aria-current={path === 'browse/' ? 'page' : undefined}>{t(lang, 'common.browse')}</a>
+          <a class="nav-questions" href={href('questions/')} aria-current={path === 'questions/' ? 'page' : undefined}>{t(lang, 'common.questions')}</a>
+          <a class="language-switch" lang={other} hreflang={other} href={url(localPath(other))}>{t(lang, 'nav.language')}</a>
+        </nav>
+      </div>
+    </header>}
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap">
+        {!chooser && <div class="footer-inner">
+        <div><Brand href={href()} /><p>{t(lang, 'footer.independent')}</p></div>
+        <nav aria-label={t(lang, 'footer.links')}>
+          {footerLinks.map((segment) => <a href={href(`${segment}/`)}>{t(lang, `common.${segment}`)}</a>)}
+          <a href={href('about/#contact')}>{t(lang, 'common.request')}</a>
+        </nav>
+        </div>}
+        <div class="footer-small">
+          {(chooser ? ['en','ar'] as const : [lang]).map((locale) => <div lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+            <p>{t(locale, 'footer.affiliation')}</p>
+            <p>{t(locale, 'footer.accuracy')} {t(locale, 'footer.advice')}</p>
+            <p><bdi>{t(locale, 'footer.copyright')}</bdi>. {t(locale, 'footer.free')}</p>
+          </div>)}
+        </div>
+      </div>
+    </footer>
+    {counterOrigin && <img src={counterOrigin + '/count?p=' + encodeURIComponent(chooser ? '/' : localPath(lang))} alt="" width="1" height="1" aria-hidden="true" referrerpolicy="no-referrer" />}
+  </body>
+</html>

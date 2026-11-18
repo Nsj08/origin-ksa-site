@@ -1,0 +1,10 @@
+{
+  "name": "origin-ksa-qa",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@lhci/cli": "0.16.1",
+    "axe-core": "4.14.1",
+    "html-validate": "11.21.1"
+  }
+}

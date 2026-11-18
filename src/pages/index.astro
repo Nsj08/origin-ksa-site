@@ -1,0 +1,22 @@
+---
+import Layout from '../components/Layout.astro';
+import Brand from '../components/Brand.astro';
+import { url } from '../lib/site';
+import { t } from '../lib/ui';
+---
+<Layout lang="en" path="" title={t('en','chooser.title')} description={t('ar','chooser.title') + ' · ' + t('en','chooser.title')} chooser>
+  <div class="chooser wrap">
+    <div class="hero">
+      <div class="chooser-copy">
+        <Brand href={url()} />
+        <h1>{t('en','chooser.title')}</h1>
+        <p class="lede" lang="ar" dir="rtl">{t('ar','chooser.title')}</p>
+        <nav class="family-links" aria-label={t('en','chooser.language') + ' · ' + t('ar','chooser.language')}>
+          <a class="action" href={url('en/')} lang="en" hreflang="en">{t('en','chooser.option')}</a>
+          <a class="action secondary" href={url('ar/')} lang="ar" dir="rtl" hreflang="ar">{t('ar','chooser.option')}</a>
+        </nav>
+      </div>
+      <img class="hero-art" src={url('pump-illustration.svg')} width="480" height="400" alt="" />
+    </div>
+  </div>
+</Layout>

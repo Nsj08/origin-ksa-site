@@ -1,0 +1,28 @@
+{
+  "en": {
+    "changelog": {
+      "title": "Changelog",
+      "intro": "Changes to coverage and the method are recorded here. Check a product page for the date its trade data was retrieved.",
+      "initial": "This version covers pumps, valves and their parts. It adds bilingual search, reported import origins and values, concentration labels, supplier-stop illustrations and a process for reviewing local evidence."
+    },
+    "impact": {
+      "title": "Impact",
+      "intro": "The site is in pre-launch review. If the owner starts measuring use after launch, this page can show verified figures.",
+      "published": "First verified figures will appear here.",
+      "launched": "Launched"
+    }
+  },
+  "ar": {
+    "changelog": {
+      "title": "سجل التغييرات",
+      "intro": "نسجل هنا التغييرات في نطاق الموقع والمنهجية. راجع صفحة المنتج لمعرفة تاريخ جلب بيانات الواردات الخاصة به.",
+      "initial": "تشمل هذه النسخة المضخات والصمامات وأجزاءها. وتتيح البحث باللغتين، وتعرض مصادر الواردات وقيمها وتصنيف تركّزها ومثالًا افتراضيًا لتوقف أكبر مورّد. كما تتيح للمالك مراجعة أدلة التصنيع المحلي."
+    },
+    "impact": {
+      "title": "الأثر",
+      "intro": "الموقع قيد المراجعة قبل إطلاقه. إذا بدأ المالك قياس الاستخدام بعد الإطلاق، يمكن نشر الأرقام هنا بعد التحقق منها.",
+      "published": "ستظهر هنا أول أرقام جرى التحقق منها.",
+      "launched": "تاريخ الإطلاق"
+    }
+  }
+}

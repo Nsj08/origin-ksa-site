@@ -1,0 +1,74 @@
+{
+  "841311": {
+    "en": "Pumps used to dispense fuel or lubricants at filling stations or garages.",
+    "ar": "مضخات لتوزيع الوقود أو زيوت التشحيم في محطات الوقود أو ورش الصيانة."
+  },
+  "841319": {
+    "en": "Other liquid pumps fitted with a measuring device or designed to take one.",
+    "ar": "مضخات سوائل أخرى مزوّدة بجهاز قياس أو مصممة لتركيبه."
+  },
+  "841320": {
+    "en": "Hand-operated liquid pumps outside the metering pump categories.",
+    "ar": "مضخات سوائل تعمل يدويًا وتندرج خارج فئات المضخات المزوّدة بأجهزة قياس."
+  },
+  "841330": {
+    "en": "Fuel, lubricant or coolant pumps for internal combustion piston engines.",
+    "ar": "مضخات وقود أو زيوت تشحيم أو سوائل تبريد لمحركات الاحتراق الداخلي المكبسية."
+  },
+  "841340": {
+    "en": "Pumps used to move concrete.",
+    "ar": "مضخات لنقل الخرسانة."
+  },
+  "841350": {
+    "en": "Other pumps that move liquid using a back-and-forth motion.",
+    "ar": "مضخات أخرى تنقل السوائل بحركة ترددية."
+  },
+  "841360": {
+    "en": "Other pumps that move liquid by trapping and moving fixed amounts as they rotate.",
+    "ar": "مضخات دوّارة أخرى تنقل السوائل بإزاحة كميات محددة منها."
+  },
+  "841370": {
+    "en": "For fire or submersible pumps, use this group when the manufacturer’s datasheet identifies the model as centrifugal.",
+    "ar": "إذا كنت تبحث عن مضخة حريق أو مضخة غاطسة، فتحقّق من ورقة مواصفات المصنّع أن الطراز يعمل بالطرد المركزي."
+  },
+  "841381": {
+    "en": "Liquid pumps that fall outside the separately named pump groups.",
+    "ar": "مضخات سوائل تندرج خارج فئات المضخات المحددة بأسمائها."
+  },
+  "841382": {
+    "en": "Equipment for lifting liquids.",
+    "ar": "معدات لرفع السوائل."
+  },
+  "841391": {
+    "en": "Parts for liquid pumps.",
+    "ar": "أجزاء مضخات السوائل."
+  },
+  "841392": {
+    "en": "Parts for equipment that lifts liquids.",
+    "ar": "أجزاء معدات رفع السوائل."
+  },
+  "848110": {
+    "en": "Valves that lower downstream pressure.",
+    "ar": "صمامات تخفّض الضغط في الجهة التي يتجه إليها التدفق."
+  },
+  "848120": {
+    "en": "Valves used in hydraulic or pneumatic power transmission.",
+    "ar": "صمامات تُستخدم في أنظمة نقل القدرة بالسوائل أو الهواء المضغوط."
+  },
+  "848130": {
+    "en": "Check valves allow flow in one direction and help prevent it from reversing.",
+    "ar": "تسمح صمامات عدم الرجوع بالتدفق في اتجاه واحد وتساعد على منع انعكاسه."
+  },
+  "848140": {
+    "en": "Safety or relief valves can open to release pressure.",
+    "ar": "يمكن أن تفتح صمامات الأمان أو تنفيس الضغط لتخفيف الضغط."
+  },
+  "848180": {
+    "en": "Other taps and valves, a broad group that includes many common designs such as ball and gate valves.",
+    "ar": "صنابير وصمامات أخرى، وهي فئة واسعة تشمل تصاميم شائعة مثل الصمامات الكروية والبوابية."
+  },
+  "848190": {
+    "en": "Parts for taps, valves and similar fittings.",
+    "ar": "أجزاء الصنابير والصمامات والتجهيزات المماثلة."
+  }
+}

@@ -1,0 +1,1 @@
+{"extends":["html-validate:standard"],"elements":["html5",{"origin-search":{"flow":true},"origin-browse":{"flow":true},"origin-import-chart":{"flow":true}}]}

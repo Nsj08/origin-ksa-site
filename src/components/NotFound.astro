@@ -1,0 +1,26 @@
+---
+import Layout from './Layout.astro';
+import Search from './Search.astro';
+import { url } from '../lib/site';
+import { t, type Language } from '../lib/ui';
+interface Props { lang: Language; bilingualFallback?: boolean }
+const {lang, bilingualFallback = false} = Astro.props;
+---
+<Layout lang={lang} path="404/" title={t(lang,'common.errorTitle')} description={t(lang,'common.error')} fallback>
+  <section class="wrap reading-page">
+    <h1>{t(lang,'common.errorTitle')}{bilingualFallback && <> · <span lang="ar" dir="rtl">{t('ar','common.errorTitle')}</span></>}</h1>
+    {bilingualFallback && <div lang="ar" dir="rtl">
+      <p>{t('ar','common.error')}</p>
+      <div class="family-links">
+        <a class="touch-link" href={url('ar/#product-search')}>{t('ar','search.label')}</a>
+        <a class="touch-link" href={url('ar/browse/')}>{t('ar','common.browse')}</a>
+      </div>
+    </div>}
+    <p>{t(lang,'common.error')}</p>
+    <Search lang={lang} />
+    <div class="family-links">
+      <a class="touch-link" href={url(`${lang}/browse/`)}>{t(lang,'common.browse')}</a>
+      <a class="touch-link" href={url(`${lang}/`)}>{t(lang,'common.home')}</a>
+    </div>
+  </section>
+</Layout>

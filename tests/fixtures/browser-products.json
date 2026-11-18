@@ -1,0 +1,27 @@
+[
+  {
+    "hs6": "848180",
+    "family": "valves",
+    "name": {"en":"Fixture valve with a single supplier","ar":"صمام تجريبي من بلد مورّد واحد"},
+    "notes": {"en":"Synthetic test fixture only.","ar":"بيانات اصطناعية للاختبار فقط."},
+    "years": [
+      {"year": 1999, "accessed":"2026-11-18", "total":1, "partners":[{"code":"999","name":{"en":"Fixture supplier","ar":"مورّد تجريبي"},"value":1,"share":1,"unspecified":false}], "top1":1,"top3":1,"hhi":10000,"risk":"high","reason":"top1","scenario":{"low":0,"central":0,"high":0}},
+      {"year": 2001, "accessed":"2026-11-18", "total":1, "partners":[{"code":"999","name":{"en":"Fixture supplier","ar":"مورّد تجريبي"},"value":1,"share":1,"unspecified":false}], "top1":1,"top3":1,"hhi":10000,"risk":"high","reason":"top1","scenario":{"low":0,"central":0,"high":0}}
+    ],
+    "source":{"url":"https://example.invalid","accessed":"2026-11-18","revision":"HS 2022"},
+    "makers":[],
+    "lcgpa":{"approved":false,"status":"pending"},
+    "headroom":{"value":0,"ratio":0}
+  },
+  {
+    "hs6": "841311",
+    "family": "pumps",
+    "name": {"en":"Fixture pump with no data","ar":"مضخة تجريبية بلا بيانات"},
+    "notes": {"en":"Synthetic test fixture only.","ar":"بيانات اصطناعية للاختبار فقط."},
+    "years":[],
+    "source":{"url":"https://example.invalid","accessed":null,"revision":null},
+    "makers":[],
+    "lcgpa":{"approved":false,"status":"pending"},
+    "headroom":null
+  }
+]

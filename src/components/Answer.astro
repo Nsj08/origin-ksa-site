@@ -1,0 +1,20 @@
+---
+import Status from './Status.astro';
+import { t, type Language } from '../lib/ui';
+interface Props {
+  lang: Language;
+  question: string;
+  status: string;
+  kind?: 'pending'|'recorded'|'confirmed'|'low'|'medium'|'high';
+}
+const { lang, question, status, kind } = Astro.props;
+---
+<article class="panel answer">
+  <h3>{question}</h3>
+  <slot />
+  <Status label={status} kind={kind} />
+  <details>
+    <summary>{t(lang,'product.evidence')}</summary>
+    <slot name="evidence" />
+  </details>
+</article>

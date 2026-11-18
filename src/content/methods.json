@@ -1,0 +1,144 @@
+{
+  "en": {
+    "title": "How we work out the figures",
+    "intro": "Where do Saudi imports of this product come from, and how large a gap would the biggest supplier leave? We use reported imports to answer the first question. We use an illustration to explore the second.",
+    "sections": [
+      {
+        "title": "Reported imports",
+        "type": "observed",
+        "body": [
+          "We use UN Comtrade’s annual import values reported by Saudi Arabia, in US dollars, for each six-digit product group and trade partner. We use up to five available reporting years per product. The latest year is the most recent year with data for that product.",
+          "Add the partner values to get the total V. A partner’s share is its value divided by V. We use the World row to check totals and exclude it from the calculation. We display non-country entries such as Areas not elsewhere specified under Unspecified. Each original partner value counts separately in the HHI. Only countries are ranked as suppliers.",
+          "The six-digit groups are for comparing trade figures. For a declaration or tariff decision, use the current Saudi customs tariff to confirm the exact 12-digit item with ZATCA."
+        ],
+        "source": "trade"
+      },
+      {
+        "title": "How concentrated are the imports?",
+        "type": "calculated",
+        "body": [
+          "The top supplier share is the largest country’s share of the total. The top three share is the sum of the three largest country shares, or all country shares if fewer than three are available.",
+          "To calculate the Herfindahl–Hirschman Index (HHI), express each partner share as a percent, square it and add the results. The index runs from 0 to 10,000. A single source accounting for all imports gives 10,000.",
+          "High means HHI is above 2,500 or the largest country supplies at least 50%. Medium means HHI is at least 1,500 or the largest country supplies at least 30%, after ruling out High. Low covers the remainder. The page explains which condition led to the label.",
+          "The HHI cutoffs come from the 2010 US Horizontal Merger Guidelines, section 5.3. Using them for imports simplifies the pattern into three labels. The label describes how concentrated the reported import sources are. It gives no probability of a disruption."
+        ],
+        "source": "guidelines"
+      },
+      {
+        "title": "If the largest supplier stopped shipping",
+        "type": "hypothetical",
+        "body": [
+          "Call the lost import value v₁. The other reported import value is V − v₁. If that value rose by a fraction g, the share of the gap it could cover would be R(g) = min(1, g × (V − v₁) / v₁). The cap at one means coverage stops at 100%. Unspecified values are included in V, even though we cannot identify their suppliers.",
+          "We show low, central and high assumptions of 10%, 25% and 50% growth in import value. These are fixed assumptions chosen for illustration. They give no estimate of spare capacity. The calculation leaves out prices, quality, certification, lead times, contracts and substitution between product types. The result is an illustration under stated assumptions, not a forecast."
+        ]
+      },
+      {
+        "title": "How much more have other suppliers shipped before?",
+        "type": "calculated",
+        "body": [
+          "For each other supplier country, compare its highest annual import value in the available five-year window with its value in the latest year. If a country is absent from an accepted year, we use zero for that country in that year. Missing product-years are skipped. Sum the positive differences to obtain historical headroom H. The headroom ratio is min(1, H / v₁).",
+          "This is derived from reported trade values. The supplier peaks can be in different years. The figures are in current dollars and reflect any changes in prices or product mix. They do not establish available capacity or a level of shipments these suppliers reached together."
+        ]
+      },
+      {
+        "title": "How makers and list matches are checked",
+        "type": "guidance",
+        "body": [
+          "A maker entry needs a dated public source that identifies the company and the products it manufactures in Saudi Arabia. A list match needs the official document, its date and page, and evidence that the written description covers the product. The owner must approve each entry before it is shown. A pending check leaves the status open. Ask the company about its exact product and consult the official list and tender documents directly.",
+          "A maker entry supports only the manufacturing claim in the cited source. Check the required origin documents for the exact model and the applicable local-content rules for any score.",
+          "A list match applies to the exact item and scope in the cited document, which may be narrower than this customs group. The current official list and tender documents set eligibility and evidence requirements."
+        ],
+        "source": "list"
+      },
+      {
+        "title": "What the figures leave out",
+        "type": "guidance",
+        "body": [
+          "Reported imports cover the customs group, which may combine products with different uses. We have no domestic production volumes, so we cannot calculate the share of Saudi demand met by imports. The country pattern can change, and annual trade values can be revised. Use the reporting year, retrieval date and original sources when comparing figures.",
+          "Product pages use rounded percentages and show dollar amounts in millions. Charts show their units, reporting years and sources. The downloadable indicators preserve more precision for checking calculations."
+        ]
+      }
+    ],
+    "example": "Worked example from the published data",
+    "exampleIntro": "Use the latest reporting year for this product. Displayed values are rounded independently. The indicators use the underlying values before rounding.",
+    "sensitivity": "Do the rankings change?",
+    "sensitivityIntro": "We rank products by gap coverage under each growth assumption and by HHI in each of the last three reporting years. We compare ranks using Spearman’s rank correlation. A value near 1 means similar order, near 0 means little rank agreement, and near −1 means the order is nearly reversed. Each comparison uses products with both values. A high replacement rank means a larger share could be replaced under the assumption. A high concentration rank means sources are less diverse. A negative correlation between these measures is therefore unsurprising.",
+    "sensitivityStable": "The estimated gap-coverage order is stable across the tested growth assumptions. The table shows how the HHI ranking compares across years.",
+    "sensitivityDepends": "The order before capping does not change with growth. At higher growth assumptions more products tie at 100%, which changes their ranks. The table also compares the HHI rankings across years.",
+    "scenarioMovers": "Largest changes across growth assumptions",
+    "hhiMovers": "Largest changes in annual HHI rankings",
+    "version": "Method version",
+    "versionText": "Version 1 introduced the import shares, concentration labels, supplier-stop illustration, historical headroom and rank comparisons described here."
+  },
+  "ar": {
+    "title": "كيف نحسب الأرقام؟",
+    "intro": "من أين تستورد السعودية هذا المنتج؟ وما حجم الفجوة إذا توقف أكبر مورد؟ نستخدم بيانات الواردات المبلّغ عنها للإجابة عن السؤال الأول، وسيناريو توضيحيًا لدراسة السؤال الثاني.",
+    "sections": [
+      {
+        "title": "الواردات المبلّغ عنها",
+        "type": "observed",
+        "body": [
+          "نستخدم القيم السنوية للواردات التي تبلغ عنها السعودية لقاعدة بيانات الأمم المتحدة للتجارة الدولية، بالدولار الأمريكي، لكل فئة ذات رمز جمركي من ست خانات ولكل شريك تجاري. نستخدم ما يصل إلى خمس سنوات متاحة لكل فئة. وأحدث سنة هي آخر سنة تتوفر عنها بيانات للفئة.",
+          "نجمع قيم الواردات من الشركاء للحصول على الإجمالي V. حصة الشريك هي قيمة وارداته مقسومة على الإجمالي. نستخدم صف العالم للتحقق من الإجمالي ونستبعده من الحساب. نعرض الإدخالات التي لا تمثل بلدًا محددًا في بند «غير محدد». وتدخل القيمة الأصلية لكل شريك على حدة في حساب مؤشر التركز. يقتصر ترتيب الموردين على البلدان.",
+          "تُستخدم الفئات ذات الست خانات لمقارنة أرقام التجارة. وللتصريح الجمركي أو التحقق من الرسوم، راجع التعريفة الجمركية السعودية السارية لتحديد البند ذي الـ12 خانة لدى هيئة الزكاة والضريبة والجمارك."
+        ],
+        "source": "trade"
+      },
+      {
+        "title": "ما مدى تركز الواردات؟",
+        "type": "calculated",
+        "body": [
+          "حصة أكبر مورد هي حصة البلد الذي صدّر إلى السعودية أعلى قيمة من هذه الواردات. وحصة أكبر ثلاثة موردين هي مجموع حصص البلدان الثلاثة الأولى، أو حصص البلدان المتاحة إذا قلّ عددها عن ثلاثة.",
+          "لحساب مؤشر هيرفندال–هيرشمان للتركز، نعبّر عن حصة كل شريك بالنسبة المئوية، ونربّع كل نسبة ثم نجمع النتائج. يتراوح المؤشر من صفر إلى 10,000. إذا جاءت جميع الواردات من مصدر واحد، بلغ المؤشر 10,000.",
+          "تكون الدرجة مرتفعة إذا تجاوز المؤشر 2,500 أو بلغت حصة البلد الأول 50% على الأقل. وبعد استبعاد الدرجة المرتفعة، تكون الدرجة متوسطة إذا بلغ المؤشر 1,500 على الأقل أو بلغت حصة البلد الأول 30% على الأقل. وفي بقية الحالات تكون الدرجة منخفضة. توضح الصفحة سبب اختيار الدرجة.",
+          "حدود المؤشر مأخوذة من القسم 5.3 من الإرشادات الأمريكية للاندماج الأفقي لعام 2010. تطبيقها على الواردات طريقة مبسطة لعرض توزيع مصادرها في ثلاث درجات. تصف الدرجة توزيع الواردات المبلّغ عنها ولا تحدد احتمال انقطاع التوريد."
+        ],
+        "source": "guidelines"
+      },
+      {
+        "title": "إذا توقفت الواردات من أكبر مورد",
+        "type": "hypothetical",
+        "body": [
+          "نرمز إلى قيمة الواردات المفقودة بـ v₁. وتبلغ قيمة باقي الواردات V − v₁. إذا زادت هذه القيمة بنسبة g، تكون نسبة سد الفجوة R(g) = min(1, g × (V − v₁) / v₁). يعني الحد الأعلى أن نسبة سد الفجوة لا تتجاوز 100%. تدخل القيم غير المحددة في الإجمالي V حتى إذا تعذر تحديد مورديها.",
+          "نفترض ثلاث زيادات مفترضة في قيمة الواردات للتوضيح. الزيادة المنخفضة 10% والوسطى 25% والمرتفعة 50%. هذه نسب ثابتة اختيرت لتوضيح الحساب ولا تقيس الطاقة الفائضة. لا يدخل في الحساب السعر أو الجودة أو الشهادات أو مدد التوريد أو العقود أو إمكانية الاستعاضة عن نوع بآخر داخل الفئة. النتيجة توضيح مبني على افتراضات محددة، وليست توقعًا."
+        ]
+      },
+      {
+        "title": "كم زادت شحنات الموردين الآخرين في السنوات السابقة؟",
+        "type": "calculated",
+        "body": [
+          "نقارن لكل بلد مورد آخر أعلى قيمة سنوية لوارداته في نافذة السنوات الخمس المتاحة مع قيمتها في أحدث سنة. إذا غاب بلد عن بيانات سنة اعتمدناها، نستخدم صفرًا له في تلك السنة. ونستبعد السنوات التي لا تتوفر فيها بيانات للفئة. نجمع الفروق الموجبة للحصول على الفارق التاريخي H. وتعادل نسبته min(1, H / v₁).",
+          "يعتمد الحساب على القيم التجارية المبلّغ عنها. قد تقع أعلى قيمة لكل مورد في سنة مختلفة. القيم بالدولار الجاري وقد تعكس تغير الأسعار ومزيج المنتجات. ولا تثبت وجود طاقة متاحة أو أن الموردين بلغوا هذا المستوى من الشحنات في الوقت نفسه."
+        ]
+      },
+      {
+        "title": "كيف نتحقق من المصنّعين ومطابقة القائمة؟",
+        "type": "guidance",
+        "body": [
+          "يحتاج كل سجل لمصنّع إلى مصدر منشور ومؤرّخ يحدد الشركة وما تصنعه في السعودية. وتتطلب مطابقة القائمة وثيقة رسمية وتاريخها ورقم الصفحة ودليلًا على أن الوصف المكتوب يشمل المنتج. يجب أن يوافق مالك الموقع على كل سجل قبل عرضه. وتبقى النتيجة غير محسومة ما دامت المراجعة جارية. اسأل الشركة عن المنتج المحدد وارجع مباشرةً إلى القائمة الرسمية ووثائق المنافسة.",
+          "يثبت سجل المصنّع حدود ما يذكره المصدر عن التصنيع. تحقّق من مستندات المنشأ المطلوبة للطراز المحدد ومن قواعد المحتوى المحلي المطبقة لحساب أي درجة.",
+          "تنطبق المطابقة على الصنف المحدد ونطاقه في الوثيقة المستشهد بها، وقد يكون أضيق من الفئة الجمركية. وتحدد القائمة الرسمية السارية ووثائق المنافسة شروط الأهلية والإثبات."
+        ],
+        "source": "list"
+      },
+      {
+        "title": "حدود الأرقام",
+        "type": "guidance",
+        "body": [
+          "تشمل الواردات المبلّغ عنها فئة جمركية قد تجمع منتجات مختلفة الاستخدامات. لا تتوفر لدينا كميات الإنتاج المحلي، لذلك لا يمكننا حساب نسبة الطلب في السعودية التي تغطيها الواردات. قد يتغير توزيع البلدان وقد تُراجع القيم السنوية. قارن الأرقام باستخدام سنة البيانات وتاريخ جلبها ومصادرها الأصلية.",
+          "تقرّب صفحات المنتجات النسب المئوية وتعرض القيم بملايين الدولارات. توضح الرسوم وحداتها وسنوات البيانات ومصادرها. يتيح ملف المؤشرات القابل للتنزيل دقة أعلى للتحقق من الحساب."
+        ]
+      }
+    ],
+    "example": "مثال محسوب من البيانات المنشورة",
+    "exampleIntro": "يستخدم المثال أحدث سنة متاحة لهذه الفئة. قُرّبت كل قيمة على حدة للعرض، وحُسبت المؤشرات باستخدام القيم قبل التقريب.",
+    "sensitivity": "هل يتغير ترتيب الفئات؟",
+    "sensitivityIntro": "نرتب الفئات بحسب نسبة سد الفجوة لكل افتراض نمو، وبحسب مؤشر التركز لكل سنة من آخر ثلاث سنوات بيانات. ونقارن الترتيبات بمعامل ارتباط سبيرمان. تعني القيمة القريبة من 1 ترتيبًا متشابهًا، والقريبة من صفر توافقًا ضعيفًا، والقريبة من سالب 1 ترتيبًا شبه معكوس. تشمل كل مقارنة الفئات التي تتوفر لها القيمتان. يعني ارتفاع ترتيب التعويض أن نسبة أكبر من الفجوة تُغطّى في المثال، بينما يعني ارتفاع ترتيب التركّز أن المصادر أقل تنوعًا. لذلك قد يكون الارتباط سالبًا بين المقياسين.",
+    "sensitivityStable": "ترتيب الفئات بحسب نسبة سد الفجوة مستقر بين افتراضات النمو المختبرة. ويبين الجدول كيف يتغير ترتيب التركز بين السنوات.",
+    "sensitivityDepends": "لا يتغير الترتيب مع زيادة النمو قبل تطبيق السقف. وعند افتراض نمو أعلى، تتعادل فئات أكثر عند 100% فتتغير مراتبها. ويقارن الجدول أيضًا ترتيب التركز بين السنوات.",
+    "scenarioMovers": "أكبر تغيرات الترتيب بين افتراضات النمو",
+    "hhiMovers": "أكبر تغيرات الترتيب السنوي بحسب مؤشر التركز",
+    "version": "إصدار المنهجية",
+    "versionText": "يقدم الإصدار الأول حصص الواردات ودرجات التركز وسيناريو توقف أكبر مورد والفارق التاريخي ومقارنات الترتيب الموضحة هنا."
+  }
+}

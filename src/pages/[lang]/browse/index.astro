@@ -1,0 +1,119 @@
+---
+import Layout from '../../../components/Layout.astro';
+import Status from '../../../components/Status.astro';
+import data from '../../../data/products.json';
+import { url } from '../../../lib/site';
+import { languages, listLabel, namedPartners, number, tableShare, t, type Language, type Product } from '../../../lib/ui';
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Language;
+const b = (key: string) => t(lang,`browse.${key}`);
+const p = (key: string) => t(lang,`product.${key}`);
+const pending = t(lang,'common.pending');
+const families = ['pumps','valves'] as const;
+const headings = [b('product'),b('makers'),b('supplier'),b('byRisk'),b('list')];
+const products = (data as Product[]).map((product) => {
+  const latest = product.years.at(-1);
+  const supplier = latest && namedPartners(latest)[0];
+  const risk = latest?.risk ?? null;
+  return { product, latest, supplier, risk, listKey: listLabel(product) };
+}).sort((a,b) => a.product.name[lang].localeCompare(b.product.name[lang], lang));
+---
+<Layout lang={lang} path="browse/" title={b('title')} description={b('intro')}>
+  <div class="wrap browse-wrap">
+    <h1>{b('title')}</h1>
+    <p class="lede">{b('intro')}</p>
+    <p class="source-note">{b('rights')} <a href={url(`${lang}/terms/`)}>{t(lang,'common.terms')}</a></p>
+    <origin-browse>
+      <div class="browse-tools">
+        <div class="metric-controls browse-filters">
+          <label for="browse-family">{b('filter')}
+            <select id="browse-family" disabled>
+              <option value="all">{b('all')}</option>
+              {families.map((family) => <option value={family}>{t(lang,'common.'+family)}</option>)}
+            </select>
+          </label>
+          <label for="browse-sort">{b('sort')}
+            <select id="browse-sort" disabled>
+              <option value="name">{b('byName')}</option>
+              <option value="share">{b('byShare')}</option>
+              <option value="risk">{b('byRisk')}</option>
+              <option value="code">{b('byCode')}</option>
+            </select>
+          </label>
+        </div>
+        <noscript><div class="family-links">
+          {families.map((family) => <a class="touch-link" href={'#'+family}>{t(lang,'common.'+family)}</a>)}
+        </div></noscript>
+        <a href={url('indicators.csv')} class="action secondary" download>{b('download')}</a>
+      </div>
+      {families.map((family) => <section class="section-block" id={family} data-family={family}>
+        <h2>{t(lang,'common.'+family)}</h2>
+        <div class="browse-table">
+          <table role="table" aria-label={t(lang,'common.'+family)}>
+            <thead role="rowgroup"><tr role="row">{headings.map((label) => <th role="columnheader" scope="col">{label}</th>)}</tr></thead>
+            <tbody role="rowgroup" data-sorted>
+              {products.filter(({product}) => product.family === family).map(({product, latest, supplier, risk, listKey}) => <tr
+                role="row" data-code={product.hs6} data-risk={risk ?? ''} data-share={supplier?.share ?? -1}
+              >
+                <th role="rowheader" scope="row">
+                  <a class="touch-link" href={url(`${lang}/product/${product.hs6}/`)}>{product.name[lang]}</a>
+                  <bdi class="source-note">{product.hs6}</bdi>
+                </th>
+                <td role="cell"><span class="browse-cell-label" aria-hidden="true">{b('makers')}</span>{product.makers.length
+                  ? <><bdi>{number(product.makers.length,lang)}</bdi> · {p('makerCount')}</>
+                  : p('makerPending')}</td>
+                <td role="cell"><span class="browse-cell-label" aria-hidden="true">{b('supplier')}</span>{supplier && latest ? <>
+                  <bdi>{supplier.name[lang]}</bdi> · <bdi>{tableShare(supplier.share,lang)}</bdi>
+                  <span class="source-note"><bdi>{latest.year}</bdi> · <a href={product.source.url} rel="noopener noreferrer">{t(lang,'product.comtradeShort')}</a>{(latest.accessed ?? product.source.accessed) && <> · <bdi dir="ltr">{latest.accessed ?? product.source.accessed}</bdi></>}</span>
+                </> : pending}</td>
+                <td role="cell"><span class="browse-cell-label" aria-hidden="true">{b('byRisk')}</span><Status label={risk ? p(risk) : pending} kind={risk ?? 'pending'} /></td>
+                <td role="cell"><span class="browse-cell-label" aria-hidden="true">{b('list')}</span><span data-list-hs={listKey !== 'product.inProgress' ? product.hs6 : undefined} data-list-status={listKey !== 'product.inProgress' ? product.lcgpa.status : undefined}>{t(lang,listKey)}{listKey !== 'product.inProgress' && <> · {lang === 'ar' ? product.lcgpa.claim_ar : product.lcgpa.claim} · {p('listScope')}</>}</span>
+                  {listKey !== 'product.inProgress' && product.lcgpa.source && <span class="source-note"><a href={product.lcgpa.source} rel="noopener noreferrer">{p('lcgpaLink')}</a> · <bdi dir="ltr">{product.lcgpa.document_date}</bdi></span>}</td>
+              </tr>)}
+            </tbody>
+          </table>
+        </div>
+      </section>)}
+    </origin-browse>
+  </div>
+</Layout>
+<script>
+  class OriginBrowse extends HTMLElement {
+    connectedCallback() {
+      const family = this.querySelector<HTMLSelectElement>('#browse-family')!;
+      const sort = this.querySelector<HTMLSelectElement>('#browse-sort')!;
+      const groups = Array.from(this.querySelectorAll<HTMLElement>('[data-family]'), section => {
+        const body = section.querySelector<HTMLTableSectionElement>('[data-sorted]')!;
+        return {section, body, rows: Array.from(body.rows)};
+      });
+      const rank: Record<string,number> = { high: 3, medium: 2, low: 1 };
+      const choice = new URLSearchParams(location.search).get('family');
+      if (choice === 'pumps' || choice === 'valves') family.value = choice;
+
+      function filter() {
+        for (const {section} of groups) {
+          section.hidden = family.value !== 'all' && family.value !== section.dataset.family;
+        }
+      }
+
+      family.disabled = false;
+      sort.disabled = false;
+      family.addEventListener('change', filter);
+      sort.addEventListener('change', () => {
+        for (const {body, rows} of groups) {
+          const ordered = [...rows].sort((a, b) => {
+            if (sort.value === 'code') return Number(a.dataset.code) - Number(b.dataset.code);
+            if (sort.value === 'share') return Number(b.dataset.share) - Number(a.dataset.share);
+            if (sort.value === 'risk') return (rank[b.dataset.risk ?? ''] ?? 0) - (rank[a.dataset.risk ?? ''] ?? 0);
+            return 0;
+          });
+          body.append(...ordered);
+        }
+      });
+      if (choice === 'pumps' || choice === 'valves') filter();
+    }
+  }
+  if (!customElements.get('origin-browse')) customElements.define('origin-browse', OriginBrowse);
+</script>

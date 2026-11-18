@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Origin KSA product snapshot",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "properties": {
+      "hs6": {
+        "type": "string",
+        "pattern": "^[0-9]{6}$"
+      },
+      "family": {
+        "enum": [
+          "pumps",
+          "valves"
+        ]
+      },
+      "name": {
+        "type": "object",
+        "properties": {
+          "en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ar": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "en",
+          "ar"
+        ]
+      },
+      "notes": {
+        "type": "object",
+        "properties": {
+          "en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ar": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "en",
+          "ar"
+        ]
+      },
+      "source": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "accessed": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "url",
+          "accessed",
+          "revision"
+        ]
+      },
+      "years": {
+        "type": "array",
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "properties": {
+            "year": {
+              "type": "integer",
+              "minimum": 1988
+            },
+            "partners": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "name": {
+                    "type": "object",
+                    "properties": {
+                      "en": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "ar": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "en",
+                      "ar"
+                    ]
+                  },
+                  "value": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "share": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "unspecified": {
+                    "type": "boolean"
+                  },
+                  "aggregate": {
+                    "type": "boolean"
+                  },
+                  "content_type": {
+                    "enum": [
+                      "observed",
+                      "calculated"
+                    ]
+                  }
+                },
+                "required": [
+                  "code",
+                  "name",
+                  "value",
+                  "share",
+                  "unspecified",
+                  "aggregate",
+                  "content_type"
+                ]
+              }
+            },
+            "total": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMinimum": 0
+            },
+            "top1": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "top3": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "hhi": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "risk": {
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                null
+              ]
+            },
+            "reason": {
+              "enum": [
+                "top1",
+                "hhi",
+                "low",
+                null
+              ]
+            },
+            "content_type": {
+              "enum": [
+                "calculated"
+              ]
+            },
+            "scenario": {
+              "type": "object",
+              "properties": {
+                "low": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "central": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "high": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "content_type": {
+                  "enum": [
+                    "hypothetical"
+                  ]
+                }
+              },
+              "required": [
+                "low",
+                "central",
+                "high",
+                "content_type"
+              ]
+            },
+            "accessed": {
+              "type": "string",
+              "format": "date"
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "year",
+            "partners",
+            "total",
+            "top1",
+            "top3",
+            "hhi",
+            "risk",
+            "reason",
+            "content_type",
+            "scenario",
+            "accessed",
+            "revision"
+          ]
+        }
+      },
+      "makers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "name_ar": {
+              "type": "string"
+            },
+            "claim": {
+              "type": "string",
+              "minLength": 1
+            },
+            "claim_ar": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source": {
+              "type": "string",
+              "format": "uri"
+            },
+            "checked": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "required": [
+            "name",
+            "name_ar",
+            "claim",
+            "claim_ar",
+            "source",
+            "checked"
+          ]
+        }
+      },
+      "lcgpa": {
+        "type": "object",
+        "properties": {
+          "approved": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "listed",
+              "not_found",
+              "pending"
+            ]
+          }
+        },
+        "required": [
+          "approved",
+          "status"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "approved": {
+                  "const": true
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "source",
+                "document",
+                "page",
+                "document_date",
+                "checked",
+                "claim"
+              ],
+              "properties": {
+                "status": {
+                  "enum": [
+                    "listed",
+                    "not_found"
+                  ]
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "status": {
+                  "const": "pending"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "headroom": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": 0
+              },
+              "ratio": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              },
+              "content_type": {
+                "enum": [
+                  "calculated"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "ratio",
+              "content_type"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "hs6",
+      "family",
+      "name",
+      "notes",
+      "source",
+      "years",
+      "makers",
+      "lcgpa",
+      "headroom"
+    ]
+  }
+}

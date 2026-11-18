@@ -1,0 +1,99 @@
+---
+import {tradeQuery} from '../lib/trade';
+import methods from '../content/methods.json';
+import { url } from '../lib/site';
+import { t, namedPartners, tableShare, wholeDollars, type Product } from '../lib/ui';
+
+interface Props { lang: 'en' | 'ar'; }
+const { lang } = Astro.props;
+const label = (key: string) => t(lang, `article.${key}`);
+const method = methods[lang];
+type SupplierExample = { name: Record<Props['lang'], string>; latest: number; peak: number; peak_year: number };
+type ExampleProduct = Product & { headroom: (NonNullable<Product['headroom']> & { example?: SupplierExample }) | null };
+const tradeFiles = import.meta.glob<ExampleProduct[]>('../data/products.json', { eager: true, import: 'default' });
+const product = tradeFiles['../data/products.json']?.find(item => item.hs6 === '848180');
+const latest = product?.years.at(-1);
+const query = latest && product ? tradeQuery(product.hs6, latest.year) : null;
+const supplier = product?.headroom?.example;
+const partners = latest ? namedPartners(latest).slice(0, 3) : [];
+const main = partners[0];
+const locale = lang === 'ar' ? 'ar-SA-u-nu-latn' : 'en-US';
+const values = new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const shares = new Intl.NumberFormat(locale, { style: 'percent', maximumFractionDigits: 2 });
+const indices = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+const millions = (value: number) => values.format(value / 1_000_000);
+const contribution = (share: number) => (100 * share) ** 2;
+const knownContribution = partners.reduce((sum, partner) => sum + contribution(partner.share), 0);
+const reason = latest?.reason === 'top1' ? 'reasonTop' : latest?.reason === 'hhi' ? 'reasonHhi' : 'reasonLow';
+const assumptions = ['low', 'central', 'high'] as const;
+const scenarioNames = {low: 'scenarioLow', central: 'scenarioCentral', high: 'scenarioHigh'};
+const growthRates = {low: 0.1, central: 0.25, high: 0.5};
+---
+<section>
+  <h2>{method.example}</h2>
+  {product && latest && main && latest.hhi !== null && latest.top1 !== null && latest.top3 !== null ? <>
+    <p><a href={url(`${lang}/product/${product.hs6}/`)}>{product.name[lang]} (<bdi>{product.hs6}</bdi>)</a> · {label('sourceYear')} <bdi>{latest.year}</bdi></p>
+    <p>{method.exampleIntro}</p>
+    <p class="eyebrow">{label('observed')}</p>
+    <p>{label('total')} <strong><bdi>{millions(latest.total)}</bdi> {label('million')}</strong></p>
+    <p>{label('hhiExplain')} {label('exampleRounding')}</p>
+    <div class="table-scroll" role="region" tabindex="0" aria-label={label('hhi')}>
+      <table class="methods-table" aria-label={method.example}>
+        <thead>
+          <tr><th scope="col">{label('partner')}</th><th scope="col">{t(lang,'product.value')}</th><th scope="col">{label('share')}</th><th scope="col">{label('sourceContribution')}</th></tr>
+        </thead>
+        <tbody>
+          {partners.map(partner => <tr>
+            <th scope="row">{partner.name[lang]}</th>
+            <td><bdi>{wholeDollars(partner.value,lang)}</bdi></td>
+            <td><bdi>{tableShare(partner.share,lang)}</bdi></td>
+            <td><bdi>{indices.format(contribution(partner.share))}</bdi></td>
+          </tr>)}
+          <tr>
+            <th scope="row" colspan="3">{label('rest')}</th>
+            <td><bdi>{indices.format(Math.max(0, latest.hhi - knownContribution))}</bdi></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="eyebrow">{label('calculated')}</p>
+    <ul>
+      <li>{label('top1')} <strong><bdi>{shares.format(latest.top1)}</bdi></strong></li>
+      <li>{label('top3')} <strong><bdi>{shares.format(latest.top3)}</bdi></strong></li>
+      <li>{label('hhi')} <strong><bdi>{indices.format(latest.hhi)}</bdi></strong></li>
+      <li>{label('risk')} <strong>{latest.risk ? label(latest.risk) : label('pending')}</strong>. {label(reason)}</li>
+    </ul>
+    <p class="eyebrow">{label('hypothetical')}</p>
+    <p>{label('forecastFlag')}</p>
+    <p>{label('otherValue')} <bdi>{millions(latest.total - main.value)}</bdi> {label('million')}. {label('scenarioExplain')}</p>
+    <ul>
+      {assumptions.map(assumption => {
+        const result = latest.scenario?.[assumption];
+        return <li>{label(scenarioNames[assumption])} (<bdi>{shares.format(growthRates[assumption])}</bdi>) · <bdi>{result != null ? shares.format(result) : label('pending')}</bdi></li>;
+      })}
+    </ul>
+    <p class="eyebrow">{label('calculated')}</p>
+    {product.headroom ? <>
+      <p>{label('headsYears')} <bdi>{product.years.map(year => year.year).join(', ')}</bdi></p>
+      <p>{label('headroomExplain')}</p>
+      {supplier && <>
+        <h3>{supplier.name[lang]}</h3>
+        <ul>
+          <li>{label('exampleLatest')} (<bdi>{latest.year}</bdi>) · <bdi>{millions(supplier.latest)}</bdi> {label('million')}</li>
+          <li>{label('examplePeak')} (<bdi>{supplier.peak_year}</bdi>) · <bdi>{millions(supplier.peak)}</bdi> {label('million')}</li>
+          <li>{label('exampleGap')} · <bdi>{millions(supplier.peak - supplier.latest)}</bdi> {label('million')}</li>
+          <li>{label('otherGaps')} · <bdi>{millions(Math.max(0, product.headroom.value - (supplier.peak - supplier.latest)))}</bdi> {label('million')}</li>
+        </ul>
+      </>}
+      <ul>
+        <li>{label('headroom')} <bdi>{millions(product.headroom.value)}</bdi> {label('million')}</li>
+        <li>{label('headroomRatio')} <bdi>{shares.format(product.headroom.ratio)}</bdi></li>
+      </ul>
+    </> : <p class="notice">{label('pending')}</p>}
+    <p class="source-note">
+      <a href={product.source.url} rel="noopener noreferrer">{label('dataSource')}</a>
+      {query && <> · <a href={query} rel="noopener noreferrer">{label('sourceQuery')}</a></>}
+      · {label('retrieved')} <bdi>{product.source.accessed ?? label('pending')}</bdi>
+    </p>
+  </> : <p class="notice">{label('pending')}</p>}
+</section>

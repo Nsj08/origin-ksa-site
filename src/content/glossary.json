@@ -1,0 +1,166 @@
+{
+  "en": {
+    "title": "Glossary",
+    "intro": "Terms used on product pages and in the method.",
+    "items": [
+      [
+        "HS code",
+        "A customs classification code whose first six digits are shared internationally under the Harmonized System."
+      ],
+      [
+        "Reporting year",
+        "The calendar year to which reported import values relate."
+      ],
+      [
+        "Retrieval date",
+        "The date on which we fetched the source data."
+      ],
+      [
+        "Trade partner",
+        "The country or other partner recorded for an import entry in UN Comtrade."
+      ],
+      [
+        "Unspecified",
+        "Import values reported under partner entries that do not identify a supplier country."
+      ],
+      [
+        "Import share",
+        "A partner’s import value divided by the total reported import value for the product and year."
+      ],
+      [
+        "Top-three share",
+        "The combined share of up to three countries with the highest import values for a product."
+      ],
+      [
+        "Herfindahl–Hirschman Index (HHI)",
+        "A concentration measure that adds the squared percentage shares of import partners on a scale up to 10,000."
+      ],
+      [
+        "Concentration label",
+        "A low, medium or high label based on the HHI and the largest supplier country’s share."
+      ],
+      [
+        "Replaceable share",
+        "The share of the lost import value that the remaining import sources could cover under an assumed increase in shipments."
+      ],
+      [
+        "Historical headroom",
+        "The sum of how far each other supplier’s latest import value is below its own recent annual peak."
+      ],
+      [
+        "Spearman rank correlation",
+        "A measure from −1 to 1 of how closely two rankings agree."
+      ],
+      [
+        "Mandatory List of National Products",
+        "The official list issued by the Local Content and Government Procurement Authority for government procurement."
+      ],
+      [
+        "Approved maker entry",
+        "A public-source manufacturing claim that the owner has approved for display."
+      ],
+      [
+        "Saudi manufacturing claim",
+        "A statement about what a company makes in Saudi Arabia, limited to the scope of the source."
+      ],
+      [
+        "Verified origin",
+        "The origin of a specific product as established under the applicable rules and with the required evidence."
+      ],
+      [
+        "Local-content score",
+        "A measure of spending in Saudi Arabia on items such as goods, services and workforce costs under the applicable methodology. A factory address alone cannot establish a score."
+      ],
+      [
+        "Tender eligibility",
+        "Whether a specific bid or product meets the requirements in the tender documents."
+      ],
+      [
+        "Saudi tariff item",
+        "A 12-digit item in the integrated tariff published by ZATCA for customs purposes."
+      ]
+    ]
+  },
+  "ar": {
+    "title": "المصطلحات",
+    "intro": "مصطلحات مستخدمة في صفحات المنتجات والمنهجية.",
+    "items": [
+      [
+        "الرمز الجمركي",
+        "رمز لتصنيف السلع جمركيًا، وأول ست خانات منه مشتركة دوليًا بموجب النظام المنسق."
+      ],
+      [
+        "سنة البيانات",
+        "السنة الميلادية التي تخصها قيم الواردات المبلّغ عنها."
+      ],
+      [
+        "تاريخ جلب البيانات",
+        "التاريخ الذي جلبنا فيه البيانات من المصدر."
+      ],
+      [
+        "الشريك التجاري",
+        "البلد أو الشريك الآخر المسجل في بيانات الواردات بقاعدة الأمم المتحدة للتجارة الدولية."
+      ],
+      [
+        "غير محدد",
+        "قيم واردات سُجلت تحت بنود لا تحدد بلد المورد."
+      ],
+      [
+        "حصة من الواردات",
+        "قيمة واردات الشريك مقسومة على إجمالي قيمة الواردات المبلّغ عنها للفئة والسنة."
+      ],
+      [
+        "حصة أكبر ثلاثة موردين",
+        "مجموع حصص البلدان الثلاثة الأعلى في قيمة الواردات للفئة، أو حصص جميع البلدان إذا قل عددها عن ثلاثة."
+      ],
+      [
+        "مؤشر هيرفندال–هيرشمان (HHI)",
+        "مقياس للتركز يجمع مربعات الحصص المئوية لشركاء الاستيراد ويبلغ حده الأعلى 10,000."
+      ],
+      [
+        "درجة التركز",
+        "درجة منخفضة أو متوسطة أو مرتفعة تستند إلى مؤشر التركز وحصة أكبر بلد مورد."
+      ],
+      [
+        "نسبة سد الفجوة",
+        "النسبة من قيمة الواردات المفقودة التي قد تغطيها المصادر المتبقية إذا زادت شحناتها بالمقدار المفترض."
+      ],
+      [
+        "الفارق التاريخي",
+        "مجموع الفروق بين أحدث قيمة للواردات من كل مورد آخر وأعلى قيمة سنوية سُجلت له في السنوات الأخيرة."
+      ],
+      [
+        "معامل ارتباط الرتب لسبيرمان",
+        "مقياس يتراوح بين سالب 1 و1 لمدى توافق ترتيبين."
+      ],
+      [
+        "القائمة الإلزامية للمنتجات الوطنية",
+        "القائمة الرسمية التي تصدرها هيئة المحتوى المحلي والمشتريات الحكومية للمشتريات الحكومية."
+      ],
+      [
+        "سجل مصنّع معتمد للنشر",
+        "معلومة عن التصنيع تستند إلى مصدر منشور ووافق مالك الموقع على عرضها."
+      ],
+      [
+        "معلومة عن التصنيع في السعودية",
+        "بيان يوضح ما تصنعه شركة في السعودية في حدود ما يذكره المصدر."
+      ],
+      [
+        "المنشأ المثبت",
+        "منشأ منتج محدد وفق القواعد المطبقة وبعد تقديم الإثباتات المطلوبة."
+      ],
+      [
+        "درجة المحتوى المحلي",
+        "مقياس للإنفاق داخل المملكة على بنود مثل السلع والخدمات وتكاليف القوى العاملة وفق المنهجية المعتمدة. عنوان المصنع وحده لا يحدّد الدرجة."
+      ],
+      [
+        "أهلية المشاركة في المنافسة",
+        "مدى استيفاء عرض أو منتج محدد للمتطلبات الواردة في وثائق المنافسة."
+      ],
+      [
+        "البند الجمركي السعودي",
+        "بند من 12 خانة في التعريفة الجمركية المتكاملة التي تنشرها هيئة الزكاة والضريبة والجمارك."
+      ]
+    ]
+  }
+}

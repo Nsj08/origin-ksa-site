@@ -1,0 +1,13 @@
+---
+interface Props { label: string; kind?: 'pending' | 'confirmed' | 'recorded' | 'low' | 'medium' | 'high'; }
+const { label, kind = 'pending' } = Astro.props;
+---
+<span class:list={['status', kind]}>
+  <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    {kind === 'pending' && <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>}
+    {(kind === 'confirmed' || kind === 'low') && <><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></>}
+    {kind === 'recorded' && <><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 9h8m-8 5h8"/></>}
+    {(kind === 'high' || kind === 'medium') && <><path d={kind === 'high' ? 'M12 3 22 20H2z' : 'M12 3 22 12 12 21 2 12z'}/><path d="M12 8v5m0 2v2"/></>}
+  </svg>
+  {label}
+</span>

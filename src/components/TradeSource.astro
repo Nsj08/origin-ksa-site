@@ -1,0 +1,13 @@
+---
+import {tradeQuery} from '../lib/trade';
+import {t, type Language, type Product } from '../lib/ui';
+interface Props { lang: Language; source: Product['source']; hs6: string; year?: number; accessed?: string | null; calculated?: boolean; }
+const {lang, source, hs6, year, accessed = source.accessed, calculated} = Astro.props;
+---
+<p class="source-note">
+  {t(lang,'common.source')}{' '}<a href={source.url} rel="noopener noreferrer">{t(lang,'product.comtrade')}</a>
+  {year !== undefined && <> · {t(lang,'common.year')}{' '}<bdi>{year}</bdi></>}
+  {accessed && <> · {t(lang,'browse.atDate')}{' '}<bdi dir="ltr">{accessed}</bdi></>}
+  {year !== undefined && <> · <a href={tradeQuery(hs6,year)} rel="noopener noreferrer">{t(lang,'product.query')}</a></>}
+  {calculated && <> · {t(lang,'product.calculationCredit')}</>}
+</p>

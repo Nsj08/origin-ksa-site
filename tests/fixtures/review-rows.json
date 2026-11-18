@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "hs6": "848180",
+      "makers": [],
+      "lcgpa": {
+        "approved": false,
+        "status": "pending"
+      }
+    }
+  ],
+  "maker": {
+    "hs6": "848180",
+    "claim": "ORIGINKSA_TEST_ONLY_REVIEW",
+    "source": "https://example.invalid/row",
+    "evidence": "ORIGINKSA_TEST_ONLY_REVIEW",
+    "checked": "2020-01-01",
+    "confidence": "fixture",
+    "approved": "",
+    "name": "ORIGINKSA_TEST_ONLY_MAKER",
+    "claim_ar": "ORIGINKSA_TEST_ONLY_REVIEW",
+    "name_ar": "",
+    "document": "",
+    "document_date": "",
+    "page": "",
+    "status": ""
+  },
+  "match": {
+    "hs6": "848180",
+    "claim": "ORIGINKSA_TEST_ONLY_REVIEW",
+    "source": "https://lcgpa.gov.sa/example-test-only",
+    "evidence": "ORIGINKSA_TEST_ONLY_REVIEW",
+    "checked": "2020-01-01",
+    "confidence": "fixture",
+    "approved": "",
+    "name": "ORIGINKSA_TEST_ONLY_MAKER",
+    "claim_ar": "ORIGINKSA_TEST_ONLY_REVIEW",
+    "name_ar": "",
+    "document": "ORIGINKSA_TEST_ONLY_LIST",
+    "document_date": "2020-01-01",
+    "page": "1",
+    "status": "listed"
+  }
+}

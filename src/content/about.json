@@ -1,0 +1,18 @@
+{
+  "en": {
+    "title":"About Origin KSA",
+    "intro":"Origin KSA brings public information on pumps and valves into one place. You can use it to check for published evidence of Saudi manufacturing, see where reported imports come from, and find the official list for government procurement.",
+    "story":"I’m Nawaf Aljasser, a student in Riyadh planning to study engineering.",
+    "independence":"Origin KSA is an independent student project. It is not affiliated with or endorsed by LCGPA, the Ministry of Industry and Mineral Resources, the Saudi Export Development Authority, the Made in Saudi programme, UN Comtrade, or any company listed.",
+    "ai":"OpenAI Codex designed and coded the site using a brief prepared with Anthropic’s Claude. Codex also drafted the English and Arabic text. I set the project’s goals and rules. Public company entries and list matches require my approval.",
+    "cite":"Cite Origin KSA, the page title and URL, and your access date. For a trade figure, also include the product code, reporting year and original UN Comtrade source shown on the page."
+  },
+  "ar": {
+    "title":"عن منشأ",
+    "intro":"يجمع منشأ معلومات منشورة عن المضخات والصمامات في مكان واحد. يمكنك البحث عن أدلة منشورة على التصنيع في السعودية، ومعرفة مصادر الواردات المبلّغ عنها، والوصول إلى القائمة الرسمية للمشتريات الحكومية.",
+    "story":"أنا نواف الجاسر، طالب في الرياض أخطط لدراسة الهندسة.",
+    "independence":"منشأ مشروع طلابي مستقل. وهو غير تابع لهيئة المحتوى المحلي والمشتريات الحكومية، أو وزارة الصناعة والثروة المعدنية، أو هيئة تنمية الصادرات السعودية، أو برنامج صنع في السعودية، أو قاعدة بيانات الأمم المتحدة للتجارة الدولية، أو أي شركة مذكورة في الموقع. ولا يحظى بتأييد أيٍّ منها.",
+    "ai":"صممت أداة Codex من OpenAI الموقع وبرمجته بناءً على موجز أُعد باستخدام Claude من Anthropic. وصاغت Codex النصوص بالعربية والإنجليزية أيضًا. حددتُ أهداف المشروع وقواعده، ويشترط نشر كل سجل لمصنّع وكل مطابقة للقائمة موافقتي.",
+    "cite":"عند الاستشهاد بمنشأ، اذكر عنوان الصفحة ورابطها وتاريخ الاطلاع. وعند الاستشهاد برقم عن التجارة، أضف رمز الفئة والسنة ومصدر بيانات الأمم المتحدة للتجارة الدولية الوارد في الصفحة."
+  }
+}

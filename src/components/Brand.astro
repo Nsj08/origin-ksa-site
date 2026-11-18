@@ -1,0 +1,10 @@
+---
+import {url} from '../lib/site';
+interface Props { href: string }
+const {href} = Astro.props;
+---
+<a class="wordmark" href={href}>
+  <img src={url('origin-mark.svg')} width="28" height="28" alt="" />
+  <bdi lang="en">Origin KSA</bdi>
+  <bdi class="brand-ar" lang="ar">منشأ</bdi>
+</a>

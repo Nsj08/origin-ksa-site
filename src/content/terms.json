@@ -1,0 +1,66 @@
+{
+  "en": {
+    "title": "Terms of use",
+    "intro": "Origin KSA is free to use. It has no payments, ads, sponsored listings, logins, paywalls or email gates.",
+    "sections": [
+      {
+        "title": "Using the information",
+        "body": [
+          "Origin KSA is an independent student project. The site provides general information. It does not provide procurement, legal, financial or investment advice. Check current official sources, your tender documents and the company’s own information before making a decision.",
+          "Information may be incomplete or out of date. To the extent permitted by applicable law, the site is provided without warranties and the owner is not liable for decisions made using it."
+        ]
+      },
+      {
+        "title": "Acceptable use",
+        "body": [
+          "Follow applicable law and the rights of others. Do not interfere with the site’s operation, submit harmful material or imply that Origin KSA or a listed source endorses you."
+        ]
+      },
+      {
+        "title": "Corrections and removal requests",
+        "body": [
+          "Company entries cite public sources and give the date checked. We do not rank or rate companies. To request a correction or removal, follow the contact link to the project’s public GitHub issues. Give the page link, identify the detail to review and include a public source if available. We review requests promptly.",
+          "Posting requires a GitHub account. Anyone can read the request and your username, including after the issue is closed. Keep personal information, confidential complaints and private documents out of the request."
+        ]
+      },
+      {
+        "title": "Code, content and data",
+        "body": [
+          "© 2026 Nawaf Aljasser. The source code is licensed under the MIT licence. The original written content, Origin KSA name, wordmark and logo are all rights reserved. Creative Commons Attribution 4.0 International (CC BY 4.0) applies only to the rights the owner holds in the calculated indicators. Third-party information remains subject to the original providers’ terms."
+        ]
+      }
+    ]
+  },
+  "ar": {
+    "title": "شروط الاستخدام",
+    "intro": "استخدام منشأ مجاني. لا يتضمن الموقع مدفوعات أو إعلانات أو إدراجًا مدفوعًا أو تسجيل دخول، ولا يشترط اشتراكًا أو تقديم بريد إلكتروني للاطلاع على محتواه.",
+    "sections": [
+      {
+        "title": "استخدام المعلومات",
+        "body": [
+          "منشأ مشروع طلابي مستقل. يقدم الموقع معلومات عامة ولا يقدم مشورة في المشتريات أو القانون أو الشؤون المالية أو الاستثمار. تحقّق من المصادر الرسمية الحالية ووثائق المنافسة والمعلومات الصادرة عن الشركة قبل اتخاذ أي قرار.",
+          "قد تكون المعلومات ناقصة أو قديمة. وفي الحدود التي يجيزها النظام، يُقدَّم الموقع دون ضمانات، ولا يتحمل المالك مسؤولية القرارات المتخذة بناءً على محتواه."
+        ]
+      },
+      {
+        "title": "الاستخدام المقبول",
+        "body": [
+          "التزم بالأنظمة المطبقة وحقوق الآخرين. يحظر تعطيل عمل الموقع أو إرسال محتوى ضار أو الإيحاء بأن منشأ أو أي مصدر مذكور فيه يؤيدك."
+        ]
+      },
+      {
+        "title": "طلبات التصحيح والإزالة",
+        "body": [
+          "يبيّن كل إدراج لشركة مصدر المعلومة وتاريخ التحقق منها. لا يرتّب منشأ الشركات ولا يقيّمها. لطلب تصحيح معلومة أو إزالة إدراج، اتبع رابط التواصل للوصول إلى صفحة الطلبات العامة للمشروع على GitHub. أرفق رابط الصفحة، وحدّد المعلومة التي تريد مراجعتها، وأضف مصدرًا منشورًا إن توفر. نراجع الطلبات دون تأخير غير مبرر.",
+          "يتطلب نشر الطلب حسابًا على GitHub. يستطيع أي شخص الاطلاع على الطلب واسم المستخدم حتى بعد إغلاقه. تجنّب تضمين معلومات شخصية أو شكاوى سرية أو مستندات خاصة."
+        ]
+      },
+      {
+        "title": "الشفرة والمحتوى والبيانات",
+        "body": [
+          "© 2026 Nawaf Aljasser. تخضع الشفرة المصدرية لرخصة MIT. جميع حقوق النصوص الأصلية واسم Origin KSA وعلامته الكتابية وشعاره محفوظة. تسري رخصة المشاع الإبداعي لنسب المصنف 4.0 دولي (CC BY 4.0) فقط على الحقوق التي يملكها صاحب الموقع في المؤشرات المحسوبة. وتظل معلومات الأطراف الأخرى خاضعة لشروط مصادرها الأصلية."
+        ]
+      }
+    ]
+  }
+}

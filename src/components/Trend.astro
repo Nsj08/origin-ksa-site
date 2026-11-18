@@ -1,0 +1,67 @@
+---
+import TradeSource from './TradeSource.astro';
+import {money, percent, tableShare, wholeDollars, t, type Language, type Product} from '../lib/ui';
+interface Props { lang: Language; product: Product }
+const {lang, product} = Astro.props;
+const years = product.years.slice(-5);
+const p = (key: string) => t(lang,`product.${key}`);
+const first = years[0];
+const last = years.at(-1);
+const minYear = first?.year ?? 0;
+const maxYear = last?.year ?? 0;
+const topValue = Math.max(1, ...years.map(({total}) => total));
+const metrics = [
+  {label:p('value'), key:'total' as const, max: topValue, format:(value: number) => money(value, lang)},
+  {label:p('trendShare'), key:'top1' as const, max: 1, format:(value: number) => percent(value, lang)},
+];
+---
+<section class="panel screen-only">
+  <p class="eyebrow">{p('observed')} · {p('calculated')}</p>
+  <h2>{p('trend')}</h2>
+  {first && last ? <>
+    <div class="trend-pair">
+      {metrics.map(({label,key,max,format}) => {
+        const points = years.flatMap((year) => {
+          const value = year[key];
+          if (value === null) return [];
+          return [{ year: year.year, x: minYear === maxYear ? 164 : 30 + (year.year - minYear) / (maxYear - minYear) * 265, y: 111 - 86 * value / max }];
+        });
+        return <figure class="panel">
+          <h3>{label}</h3>
+          <svg class="trend-svg" viewBox="0 0 320 135" aria-hidden="true">
+            <line class="axis" x1="30" y1="111" x2="295" y2="111" />
+            <line class="axis" x1="30" y1="25" x2="30" y2="111" />
+            <text x="26" y="114" text-anchor="end">0</text>
+            <text x="32" y="17" direction="ltr">{format(max)}</text>
+            {points.map((point,i) => {
+              const before = points[i-1];
+              return <>
+                {before && point.year === before.year + 1 && <line class="line" x1={before.x} y1={before.y} x2={point.x} y2={point.y} />}
+                <circle class="point" cx={point.x} cy={point.y} r="3.5" />
+                <text x={point.x} y="128" text-anchor="middle">{point.year}</text>
+              </>;
+            })}
+          </svg>
+          <figcaption class="source-note">
+            {first[key] !== null && <><bdi>{first.year}</bdi> · <bdi>{format(first[key])}</bdi></>}
+            {last !== first && last[key] !== null && <> / <bdi>{last.year}</bdi> · <bdi>{format(last[key])}</bdi></>}
+          </figcaption>
+        </figure>;
+      })}
+    </div>
+    <details>
+      <summary>{p('showTable')}</summary>
+      <div class="table-scroll" role="region" tabindex="0" aria-label={p('trend')}>
+        <table>
+          <caption>{p('trend')}</caption>
+          <thead><tr><th scope="col">{t(lang,'common.year')}</th><th scope="col">{p('value')}</th><th scope="col">{p('trendShare')}</th><th scope="col">{t(lang,'browse.atDate')}</th></tr></thead>
+          <tbody>{years.map(({year,total,top1,accessed}) => <tr>
+            <th scope="row"><bdi>{year}</bdi></th><td><bdi>{wholeDollars(total,lang)}</bdi></td>
+            <td>{top1 === null ? t(lang,'common.pending') : <bdi>{tableShare(top1,lang)}</bdi>}</td><td>{accessed || product.source.accessed ? <bdi dir="ltr">{accessed ?? product.source.accessed}</bdi> : t(lang,'common.pending')}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>
+    </details>
+  </> : <p>{t(lang,'common.pending')}</p>}
+  <TradeSource hs6={product.hs6} lang={lang} source={product.source} calculated />
+</section>

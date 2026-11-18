@@ -1,0 +1,80 @@
+---
+import TradeSource from './TradeSource.astro';
+import {money, namedPartners, percent, tableShare, wholeDollars, t, type Language, type Product } from '../lib/ui';
+interface Props { lang: Language; product: Product }
+const { lang, product } = Astro.props;
+const available = product.years.slice(-5);
+const latest = available.at(-1)?.year;
+const oldest = available[0]?.year;
+const years = latest !== undefined && oldest !== undefined
+  ? Array.from({ length: latest - oldest + 1 }, (_, i) => latest - i)
+  : [];
+const p = (key: string) => t(lang,`product.${key}`);
+---
+<section class="panel screen-only" aria-labelledby="import-sources">
+  <p class="eyebrow">{p('observed')}</p>
+  <h2 id="import-sources">{p('imports')}</h2>
+  {years.length ? <origin-import-chart>
+    <div class="metric-controls" hidden data-year-controls>
+      <label>{t(lang,'common.year')}
+        <select name="year">
+          {years.map((year) => <option value={year} selected={year === latest}>{year}</option>)}
+        </select>
+      </label>
+    </div>
+    {years.map((selected) => {
+      const year = available.find((item) => item.year === selected);
+      const first = year && namedPartners(year)[0];
+      return <div data-chart-year={selected} hidden={selected !== latest}>
+        {year ? <>
+          <p>{first ? <>{p('topSupplier')} · <strong><bdi>{first.name[lang]}</bdi> · <bdi>{percent(first.share,lang)}</bdi></strong> · <bdi>{year.year}</bdi></> : p('noNamed')}</p>
+          <p>{p('tradeTotal')} · <strong><bdi>{money(year.total,lang)}</bdi></strong></p>
+          <figure aria-label={p('share')}>
+            <ul class="chart-list">
+              {year.partners.map((partner) => <li class="bar-row">
+                <span><bdi>{partner.name[lang]}</bdi></span>
+                <svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+                  <rect class="bar-fill" x={lang === 'ar' ? 100 - partner.share * 100 : 0} y="0" width={partner.share * 100} height="10" />
+                </svg>
+                <span><bdi>{percent(partner.share,lang)}</bdi></span>
+              </li>)}
+            </ul>
+            <figcaption class="source-note">{p('share')} · <bdi>{year.year}</bdi></figcaption>
+          </figure>
+          <details>
+            <summary>{p('showTable')}</summary>
+            <div class="table-scroll" role="region" tabindex="0" aria-label={p('imports')}>
+              <table>
+                <caption>{p('imports')} · <bdi>{year.year}</bdi></caption>
+                <thead><tr><th scope="col">{p('country')}</th><th scope="col">{p('value')}</th><th scope="col">{p('share')}</th></tr></thead>
+                <tbody>{year.partners.map((partner) => <tr>
+                  <th scope="row"><bdi>{partner.name[lang]}</bdi></th>
+                  <td><bdi>{wholeDollars(partner.value,lang)}</bdi></td><td><bdi>{tableShare(partner.share,lang)}</bdi></td>
+                </tr>)}</tbody>
+              </table>
+            </div>
+          </details>
+        </> : <p>{p('noImportYear')}</p>}
+        <TradeSource hs6={product.hs6} lang={lang} source={product.source} year={selected} accessed={year?.accessed} calculated />
+      </div>;
+    })}
+  </origin-import-chart> : <>
+    <p>{t(lang,'common.pending')} · {p('noImports')}</p>
+    <TradeSource hs6={product.hs6} lang={lang} source={product.source} />
+  </>}
+</section>
+<script>
+  class OriginImportChart extends HTMLElement {
+    connectedCallback() {
+      const controls = this.querySelector<HTMLElement>('[data-year-controls]')!;
+      const select = controls.querySelector('select')!;
+      controls.hidden = false;
+      select.addEventListener('change', () => {
+        this.querySelectorAll<HTMLElement>('[data-chart-year]').forEach((chart) => {
+          chart.hidden = chart.dataset.chartYear !== select.value;
+        });
+      });
+    }
+  }
+  if (!customElements.get('origin-import-chart')) customElements.define('origin-import-chart', OriginImportChart);
+</script>

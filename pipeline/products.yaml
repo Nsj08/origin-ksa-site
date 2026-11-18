@@ -1,0 +1,20 @@
+[
+  {"hs6":"841311","family":"pumps","name":{"en":"Fuel dispensing pumps","ar":"مضخات توزيع الوقود"}},
+  {"hs6":"841319","family":"pumps","name":{"en":"Other metering pumps","ar":"مضخات قياس أخرى"}},
+  {"hs6":"841320","family":"pumps","name":{"en":"Hand pumps","ar":"مضخات يدوية"}},
+  {"hs6":"841330","family":"pumps","name":{"en":"Pumps for piston engines","ar":"مضخات لمحركات مكبسية"}},
+  {"hs6":"841340","family":"pumps","name":{"en":"Concrete pumps","ar":"مضخات الخرسانة"}},
+  {"hs6":"841350","family":"pumps","name":{"en":"Reciprocating displacement pumps","ar":"مضخات إزاحة ترددية"}},
+  {"hs6":"841360","family":"pumps","name":{"en":"Rotary displacement pumps","ar":"مضخات إزاحة دوّارة"}},
+  {"hs6":"841370","family":"pumps","name":{"en":"Centrifugal pumps","ar":"مضخات طرد مركزي"}},
+  {"hs6":"841381","family":"pumps","name":{"en":"Other liquid pumps","ar":"مضخات سوائل أخرى"}},
+  {"hs6":"841382","family":"pumps","name":{"en":"Liquid elevators","ar":"معدات رفع السوائل"}},
+  {"hs6":"841391","family":"pumps","name":{"en":"Pump parts","ar":"قطع غيار المضخات"}},
+  {"hs6":"841392","family":"pumps","name":{"en":"Liquid elevator parts","ar":"قطع غيار معدات رفع السوائل"}},
+  {"hs6":"848110","family":"valves","name":{"en":"Pressure-reducing valves","ar":"صمامات تخفيض الضغط"}},
+  {"hs6":"848120","family":"valves","name":{"en":"Hydraulic and pneumatic transmission valves","ar":"صمامات نقل القدرة الهيدروليكية والهوائية"}},
+  {"hs6":"848130","family":"valves","name":{"en":"Check valves","ar":"صمامات عدم الرجوع"}},
+  {"hs6":"848140","family":"valves","name":{"en":"Safety and relief valves","ar":"صمامات الأمان وتنفيس الضغط"}},
+  {"hs6":"848180","family":"valves","name":{"en":"Other taps and valves","ar":"صنابير وصمامات أخرى"}},
+  {"hs6":"848190","family":"valves","name":{"en":"Tap and valve parts","ar":"قطع غيار الصنابير والصمامات"}}
+]

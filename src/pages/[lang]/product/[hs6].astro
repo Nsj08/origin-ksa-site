@@ -1,0 +1,201 @@
+---
+import Layout from '../../../components/Layout.astro';
+import Answer from '../../../components/Answer.astro';
+import ImportChart from '../../../components/ImportChart.astro';
+import Trend from '../../../components/Trend.astro';
+import TradeSource from '../../../components/TradeSource.astro';
+import data from '../../../data/products.json';
+import descriptions from '../../../content/products.json';
+import guide from '../../../content/guidance.json';
+import { absolute, config, feedbackUrl, privateMailUrl, publicIssuesUrl, url } from '../../../lib/site';
+import { languages, listLabel, money, namedPartners, number, percent, t, type Language, type Product } from '../../../lib/ui';
+
+export function getStaticPaths() {
+  return languages.flatMap((lang) => (data as Product[]).map((product) => ({
+    params: { lang, hs6: product.hs6 },
+    props: { product },
+  })));
+}
+interface Props { product: Product }
+const { product } = Astro.props;
+const lang = Astro.params.lang as Language;
+const p = (key: string) => t(lang,`product.${key}`);
+const common = (key: string) => t(lang,`common.${key}`);
+const pending = common('pending');
+const latest = product.years.at(-1);
+const rawScenario = latest?.scenario;
+const scenario = rawScenario && rawScenario.low !== null && rawScenario.central !== null && rawScenario.high !== null
+  ? { low: rawScenario.low, central: rawScenario.central, high: rawScenario.high }
+  : null;
+const partners = latest ? namedPartners(latest).slice(0,3) : [];
+const name = product.name[lang];
+const description = (descriptions as Record<string,Record<Language,string>>)[product.hs6]?.[lang] ?? product.notes[lang];
+const path = `product/${product.hs6}/`;
+const href = (segment = '') => url(`${lang}/${segment}`);
+const canonical = absolute(`${lang}/${path}`);
+const approvedMakers = product.makers;
+const list = product.lcgpa;
+const listStatus = listLabel(product);
+const listReviewed = listStatus !== 'product.inProgress';
+const lcgpa = 'https://lcgpa.gov.sa/p/en_US/MandatoryListNationalProducts/Documents';
+const madeInSaudi = 'https://saudimade.sa/';
+const report = feedbackUrl(product.hs6);
+const reportLabel = publicIssuesUrl ? common('publicFeedbackLink') : config.feedbackFormUrl ? p('correctionForm') : p('report');
+const reportNote = publicIssuesUrl ? common('publicFeedbackNotice') : report ? p('correctionDetails') : common('privateContactUnavailable');
+const hasDataset = Boolean(latest && product.source.accessed);
+---
+<Layout lang={lang} path={path} title={name} description={description} image={`og/${lang}-${product.hs6}.png`}>
+  <div class="wrap" itemscope={hasDataset} itemtype={hasDataset ? 'https://schema.org/Dataset' : undefined}>
+    {hasDataset && latest && product.source.accessed && <>
+      <meta itemprop="identifier" content={product.hs6} />
+      <meta itemprop="inLanguage" content={lang} />
+      <meta itemprop="url" content={canonical} />
+      <meta itemprop="citation" content={product.source.url} />
+      <meta itemprop="dateModified" content={product.source.accessed} />
+      <meta itemprop="temporalCoverage" content={`${product.years[0].year}/${latest.year}`} />
+      <span itemprop="spatialCoverage" itemscope itemtype="https://schema.org/Place" hidden>
+        <meta itemprop="name" content={p('saudiArabia')} />
+      </span>
+    </>}
+    <nav class="crumb" aria-label={t(lang,'nav.breadcrumbs')}>
+      <a class="touch-link" href={href()}>{common('home')}</a><span aria-hidden="true">/</span>
+      <a class="touch-link" href={href(`browse/#${product.family}`)}>{common(product.family)}</a>
+      <details class="correction-link">
+        <summary>{p('report')}</summary>
+        <p>{reportNote}</p>
+        {report && <a class="touch-link" href={report} rel="noopener noreferrer">{reportLabel}</a>}
+        {privateMailUrl && config.feedbackFormUrl && <a class="touch-link" href={privateMailUrl} rel="noopener noreferrer"><bdi>{config.email}</bdi></a>}
+      </details>
+    </nav>
+    <header class="product-heading">
+      <h1 itemprop={hasDataset ? 'name' : undefined}>{name}</h1>
+      <p itemprop={hasDataset ? 'description' : undefined}>{description}</p>
+      <p class="source-note">{p('code')}{' '}<bdi>{product.hs6}</bdi> · {p('codeHelp')}</p>
+    </header>
+    <section aria-labelledby="answer-strip">
+      <h2 class="visually-hidden" id="answer-strip">{p('answers')}</h2>
+      <div class="answer-grid">
+        <Answer lang={lang} question={p('makersQ')} status={approvedMakers.length ? p('confirmed') : p('makerPending')} kind={approvedMakers.length ? 'confirmed' : 'pending'}>
+          <p>{approvedMakers.length ? <><bdi>{number(approvedMakers.length,lang)}</bdi> · {p('makerCount')}</> : p('makerEmpty')}</p>
+          <div slot="evidence">
+            <p>{p('makerEvidence')}</p>
+            {approvedMakers.length > 0 && <a class="touch-link" href="#makers">{p('makers')}</a>}
+          </div>
+        </Answer>
+        <Answer lang={lang} question={p('importsQ')} status={latest ? p('recorded') : pending} kind={latest ? 'recorded' : 'pending'}>
+          <p>{partners.length && latest ? <>{partners.map((partner,i) => <>{i > 0 && ' · '}<bdi>{partner.name[lang]} {percent(partner.share,lang)}</bdi></>)}<span class="source-note"> · <bdi>{latest.year}</bdi></span></> : latest ? p('noNamed') : p('noImports')}</p>
+          <div slot="evidence"><TradeSource hs6={product.hs6} lang={lang} source={product.source} year={latest?.year} accessed={latest?.accessed} calculated /></div>
+        </Answer>
+        <Answer lang={lang} question={p('riskQ')} status={latest?.risk ? p(latest.risk) : pending} kind={latest?.risk ?? 'pending'}>
+          <p>{latest?.risk ? latest.reason === 'top1' && latest.top1 !== null ? <>{p('riskReasonTop')} · <bdi>{percent(latest.top1,lang)}</bdi></> : latest.reason === 'low' ? p('riskReasonLow') : p('scoreReason').replace('{value}',number(Math.round(latest.hhi ?? 0),lang)).replace('{label}',p(latest.risk)).replace('{threshold}',p(latest.risk==='high'?'hhiHigh':'hhiMedium')) : p('noImports')}</p>
+          <p class="source-note">{p('riskScope')}</p>
+          <div slot="evidence">
+            {latest?.reason === 'top1' && latest.top1 !== null && latest.risk && <p>{p('shareBand').replace('{share}',percent(latest.top1,lang)).replace('{label}',p(latest.risk)).replace('{threshold}',percent(latest.risk === 'high' ? 0.5 : 0.3,lang))}</p>}
+            <p>{p('riskNote')}</p><TradeSource hs6={product.hs6} lang={lang} source={product.source} year={latest?.year} accessed={latest?.accessed} calculated /><a class="touch-link" href={href('methods/')}>{p('methods')}</a></div>
+        </Answer>
+        <Answer lang={lang} question={p('listQ')} status={t(lang,listStatus)} kind={listReviewed ? list.status === 'listed' ? 'confirmed' : 'recorded' : 'pending'}>
+          {listReviewed
+            ? <p data-list-hs={product.hs6} data-list-status={list.status}>{lang === 'ar' ? list.claim_ar || list.claim : list.claim} · {p('listScope')}{list.document_date && <> · <bdi dir="ltr">{list.document_date}</bdi></>}</p>
+            : <p>{p('listPendingAnswer')}</p>}
+          <div slot="evidence">
+            {listReviewed ? <>
+              {list.claim && <p>{lang === 'ar' && list.claim_ar ? list.claim_ar : list.claim}</p>}
+              {list.source && <p><a href={list.source} rel="noopener noreferrer">{list.document || p('lcgpaLink')}</a></p>}
+              <p>{list.document_date && <>{p('documentDate')}{' '}<bdi dir="ltr">{list.document_date}</bdi> · </>}{list.page && <>{p('documentPage')}{' '}<bdi>{list.page}</bdi> · </>}{list.checked && <>{common('checked')}{' '}<bdi dir="ltr">{list.checked}</bdi></>}</p>
+            </> : <p>{p('listEvidence')}</p>}
+            <a class="touch-link" href={lcgpa} rel="noopener noreferrer">{p('lcgpaLink')}</a>
+          </div>
+        </Answer>
+      </div>
+    </section>
+    {latest && new Date().getUTCFullYear() - latest.year > 2 && <p class="notice">{p('dataAge')}</p>}
+    <div class="product-body">
+      <section class="panel guide-panel">
+        <p class="eyebrow">{p('general')}</p>
+        <h2>{p('guidance')}</h2>
+        <p>{guide[approvedMakers.length ? 'makerConfirmed' : 'makerPending'][lang]} {guide[latest?.risk === 'high' ? 'risk' : 'imports'][lang]} {guide[listReviewed ? 'listConfirmed' : 'listPending'][lang]}</p>
+      </section>
+      {latest && <div class="print-only"><TradeSource hs6={product.hs6} lang={lang} source={product.source} year={latest.year} accessed={latest.accessed} calculated /></div>}
+      <ImportChart lang={lang} product={product} />
+      <Trend lang={lang} product={product} />
+      <section class="panel">
+        <p class="eyebrow">{p('scenarioLabel')}</p>
+        <h2>{p('scenario')}</h2>
+        {scenario && latest ? <>
+          <p>{p('scenarioGap')} · <strong><bdi>{percent(scenario.low,lang)}–{percent(scenario.high,lang)}</bdi></strong></p>
+          <dl class="scenarios">
+            {([{key:'low',growth:.1},{key:'central',growth:.25},{key:'high',growth:.5}] as const).map(({key,growth}) => <div>
+              <dt>{p('assumption.'+key)} · <bdi>+{percent(growth,lang)}</bdi></dt>
+              <dd><bdi>{percent(scenario[key],lang)}</bdi></dd>
+            </div>)}
+          </dl>
+          <p class="small">{guide.scenario[lang]}</p>
+          {product.headroom && <p><strong>{p('headroom')}</strong> · <bdi>{money(product.headroom.value,lang)} · {percent(product.headroom.ratio,lang)}</bdi>. {p('period')} <bdi>{product.years[0].year}–{latest.year}</bdi>. {p('headroomNote')} {p('headroomCap')}</p>}
+          <TradeSource hs6={product.hs6} lang={lang} source={product.source} year={latest.year} accessed={latest.accessed} calculated />
+        </> : <p>{pending}</p>}
+        <a class="touch-link screen-only" href={href('methods/')}>{p('methods')}</a>
+      </section>
+      <section class="panel screen-only" id="makers">
+        <h2>{p('makers')}</h2>
+        <p class="small">{p('makerNote')}</p>
+        {approvedMakers.length ? <div class="table-scroll" role="region" tabindex="0" aria-label={p('makers')}>
+          <table>
+            <thead><tr><th scope="col">{p('makerName')}</th><th scope="col">{p('makerClaim')}</th><th scope="col">{common('source')}</th><th scope="col">{common('checked')}</th></tr></thead>
+            <tbody>{approvedMakers.map((maker) => <tr data-maker-hs={product.hs6} data-maker-name={maker.name}>
+              <th scope="row"><bdi>{lang === 'ar' && maker.name_ar ? maker.name_ar : maker.name}</bdi></th>
+              <td>{lang === 'ar' && maker.claim_ar ? maker.claim_ar : maker.claim}</td>
+              <td><a class="touch-link" href={maker.source} rel="noopener noreferrer">{common('source')}</a></td><td><bdi dir="ltr">{maker.checked}</bdi></td>
+            </tr>)}</tbody>
+          </table>
+        </div> : <p>{p('makerPending')}</p>}
+      </section>
+      <section class="panel screen-only">
+        <h2>{p('links')}</h2>
+        <ul>
+          <li><a class="touch-link" href={lcgpa} rel="noopener noreferrer">{p('lcgpaLink')}</a><span class="small"> · {p('lcgpaInfo')}</span></li>
+          <li><a class="touch-link" href={`https://zatca.gov.sa/${lang}/RulesRegulations/Taxes/Pages/Integrated-Tarrifs.aspx`} rel="noopener noreferrer">{t(lang,'article.tariff')}</a><span class="small"> · {p('tariffHelp')}</span></li>
+          <li><a class="touch-link" href={madeInSaudi} rel="noopener noreferrer">{p('madeLink')}</a><span class="small"> · {p('madeInfo')}</span></li>
+          <li><a class="touch-link" href={product.source.url} rel="noopener noreferrer">{p('comtrade')}</a><span class="small"> · {p('comtradeInfo')}</span></li>
+        </ul>
+      </section>
+      <section class="panel">
+        <h2>{p('notes')}</h2>
+        <p>{product.notes[lang] || guide.notes[lang]}</p>
+        <p class="source-note">{p('update')} · {product.source.accessed ? <bdi dir="ltr">{product.source.accessed}</bdi> : pending}</p>
+        <p class="small screen-only">{reportNote}</p>
+        <p class="small print-only">{common('corrections')} · <a href={href('about/#contact')}><bdi>{absolute(`${lang}/about/#contact`)}</bdi></a></p>
+        <div class="product-actions">
+          {report && <a class="touch-link" href={report} rel="noopener noreferrer">{reportLabel}</a>}
+          <button class="action secondary" type="button" data-copy={canonical} data-success={p('copySuccess')} data-error={p('copyError')} hidden>{p('copy')}</button>
+          <button class="action secondary" type="button" data-print hidden>{p('print')}</button>
+        </div>
+        <p class="small" data-copy-result aria-live="polite" hidden></p>
+        <details class="screen-only">
+          <summary>{p('cite')}</summary>
+          <p>Origin KSA. {name} (<bdi>{product.hs6}</bdi>). {product.source.accessed && <>{p('update')}{' '}<bdi dir="ltr">{product.source.accessed}</bdi>. </>}<a href={canonical}><bdi>{canonical}</bdi></a></p>
+        </details>
+      </section>
+    </div>
+  </div>
+</Layout>
+<script>
+  const copy = document.querySelector<HTMLButtonElement>('[data-copy]');
+  const result = document.querySelector<HTMLElement>('[data-copy-result]');
+  if (copy && result) {
+    copy.hidden = false;
+    copy.addEventListener('click', async () => {
+      result.hidden = false;
+      try {
+        await navigator.clipboard.writeText(copy.dataset.copy ?? '');
+        result.textContent = copy.dataset.success ?? '';
+      } catch {
+        result.textContent = `${copy.dataset.error} ${copy.dataset.copy}`;
+      }
+    });
+  }
+  const print = document.querySelector<HTMLButtonElement>('[data-print]');
+  if (print) {
+    print.hidden = false;
+    print.addEventListener('click', () => window.print());
+  }
+</script>

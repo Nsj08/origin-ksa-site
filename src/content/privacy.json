@@ -1,0 +1,56 @@
+{
+  "en": {
+    "title": "Privacy",
+    "intro": "Nawaf Aljasser runs Origin KSA. This notice explains what happens when you browse the site or ask for a product entry to be corrected.",
+    "sections": [
+      {
+        "title": "Browsing and search",
+        "body": [
+          "You can browse without an account. Origin KSA sets no cookies. Product searches run in your browser, and the text you enter stays there.",
+          "GitHub Pages hosts the site. GitHub records visitors’ IP addresses for security, manages how long it keeps these logs and may process data outside Saudi Arabia. Its privacy statement is linked below."
+        ]
+      },
+      {
+        "title": "Public product corrections",
+        "body": [
+          "If you choose to request a correction or removal through GitHub Issues, you must sign in to GitHub. Anyone can read your GitHub username, the request and any replies. We use the details you post to review the product entry.",
+          "Include only a link to the site page, the product detail to review and any public source. Keep personal data, confidential complaints and private documents out of public issues. Closing an issue leaves the discussion visible. Other people may also keep copies."
+        ]
+      },
+      {
+        "title": "Your rights and complaints",
+        "body": [
+          "Under Saudi personal data protection law, you may have the right to know why your data is processed, access it, obtain a copy and ask for it to be corrected, completed or destroyed. These rights are subject to applicable legal exceptions.",
+          "For personal data held by GitHub, its privacy statement explains how to submit a request. For a complaint about personal data processing, use the Saudi Data and Artificial Intelligence Authority (SDAIA) complaint service linked below. Keep the details of a privacy request out of the public product tracker."
+        ]
+      }
+    ]
+  },
+  "ar": {
+    "title": "الخصوصية",
+    "intro": "يدير نواف الجاسر موقع منشأ. يوضح هذا الإشعار كيفية التعامل مع بياناتك عند تصفح الموقع أو طلب تصحيح معلومة عن منتج.",
+    "sections": [
+      {
+        "title": "التصفح والبحث",
+        "body": [
+          "يمكنك تصفح الموقع دون حساب. لا يضع منشأ ملفات تعريف ارتباط. يجري البحث عن المنتجات داخل متصفحك، وتبقى فيه الكلمات التي تدخلها.",
+          "تستضيف خدمة GitHub Pages الموقع. تسجّل GitHub عناوين بروتوكول الإنترنت للزوار لأغراض أمنية، وتحدد مدة الاحتفاظ بهذه السجلات. وقد تعالج البيانات خارج المملكة العربية السعودية. تجد رابط بيان الخصوصية لدى GitHub أدناه."
+        ]
+      },
+      {
+        "title": "طلبات تصحيح معلومات المنتجات",
+        "body": [
+          "إذا اخترت طلب تصحيح معلومة أو إزالة إدراج عبر GitHub Issues، فعليك تسجيل الدخول إلى GitHub. يستطيع أي شخص الاطلاع على اسم المستخدم والطلب والردود. نستخدم ما تنشره لمراجعة المعلومة المعنية.",
+          "يكفي أن تذكر رابط الصفحة والمعلومة المطلوب مراجعتها وأي مصدر منشور يؤيد طلبك. تجنّب نشر البيانات الشخصية أو الشكاوى السرية أو المستندات الخاصة. تظل المناقشة ظاهرة بعد إغلاق الطلب، وقد يحتفظ آخرون بنسخ منها."
+        ]
+      },
+      {
+        "title": "حقوقك وتقديم الشكاوى",
+        "body": [
+          "تشمل حقوقك بموجب نظام حماية البيانات الشخصية، بحسب ما ينطبق على حالتك، العلم بالغرض من معالجة بياناتك، والوصول إليها والحصول على نسخة منها، وطلب تصحيحها أو إكمالها أو إتلافها، مع مراعاة الاستثناءات النظامية.",
+          "إذا كان طلبك يخص بياناتك لدى GitHub، فيوضح بيان الخصوصية لديها كيفية تقديمه. ولتقديم شكوى بشأن معالجة بياناتك الشخصية، استخدم رابط خدمة الشكاوى لدى الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا) أدناه. تجنّب نشر تفاصيل طلب الخصوصية في صفحة طلبات تصحيح المنتجات العامة."
+        ]
+      }
+    ]
+  }
+}

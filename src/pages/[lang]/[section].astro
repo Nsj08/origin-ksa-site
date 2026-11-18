@@ -1,0 +1,229 @@
+---
+import {createHash} from 'node:crypto';
+import {indicatorCsv} from '../../lib/indicators';
+import Layout from '../../components/Layout.astro';
+import { absolute, config, url, counterOrigin, privateMailUrl, publicIssuesUrl } from '../../lib/site';
+import about from '../../content/about.json';
+import glossary from '../../content/glossary.json';
+import methods from '../../content/methods.json';
+import questions from '../../content/questions.json';
+import pages from '../../content/site-pages.json';
+import privacy from '../../content/privacy.json';
+import terms from '../../content/terms.json';
+import { t } from '../../lib/ui';
+import WorkedExample from '../../components/WorkedExample.astro';
+
+type Lang = 'en' | 'ar';
+type Section = 'methods' | 'questions' | 'glossary' | 'about' | 'impact' | 'changelog' | 'privacy' | 'terms';
+type Bilingual = Record<Lang, string>;
+interface Product {
+  hs6: string;
+  name: Bilingual;
+  source: { url: string; accessed: string | null };
+}
+interface Sensitivity {
+  source?: { url: string; accessed: string | null };
+  series: { key: string; year: number | null; growth: number | null }[];
+  correlations: { left: string; right: string; rho: number | null; count: number }[];
+  most_moved: Record<'scenario' | 'hhi', { hs6: string; change: number }[]>;
+  assumption_stability: 'stable' | 'depends' | null;
+}
+export function getStaticPaths() {
+  const sections: Section[] = ['methods', 'questions', 'glossary', 'about', 'impact', 'changelog', 'privacy', 'terms'];
+  return ['en', 'ar'].flatMap(lang => sections.map(section => ({ params: { lang, section } })));
+}
+
+const lang = Astro.params.lang as Lang;
+const section = Astro.params.section as Section;
+const legal = section === 'privacy' ? privacy[lang] : section === 'terms' ? terms[lang] : null;
+const current = {
+  methods: methods[lang], questions: questions[lang], glossary: glossary[lang], about: about[lang],
+  ...pages[lang],
+  privacy: privacy[lang], terms: terms[lang],
+}[section];
+
+const label = (key: string) => t(lang, `article.${key}`);
+const method = methods[lang];
+const lcgpa = 'https://lcgpa.gov.sa/p/en_US/MandatoryListNationalProducts/Documents';
+const guideline = 'https://www.justice.gov/sites/default/files/atr/legacy/2010/08/19/hmg-2010.pdf';
+const tradeFiles = import.meta.glob<Product[]>('../../data/products.json', { eager: true, import: 'default' });
+const products = tradeFiles['../../data/products.json'] ?? [];
+const sensitivityFiles = import.meta.glob<Sensitivity>('../../data/sensitivity.json', { eager: true, import: 'default' });
+const sensitivity = sensitivityFiles['../../data/sensitivity.json'];
+const sourceDates = [...new Set(products.map(product => product.source.accessed).filter(Boolean))].sort();
+const checksum = createHash('sha256').update(indicatorCsv).digest('hex');
+const tradeUrl = 'https://comtradeplus.un.org/';
+const classification = 'https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf';
+const percent = new Intl.NumberFormat('en-US', {style: 'percent', maximumFractionDigits: 1});
+function ranking(key: string) {
+  const series = sensitivity?.series.find(item => item.key === key);
+  if (series?.year != null) return `${label('rankingYear')} ${series.year}`;
+  if (series?.growth != null) return `${label('rankingAssumption')} ${percent.format(series.growth)}`;
+  return key;
+}
+const launchDate = config.launchDate;
+const tariff = `https://zatca.gov.sa/${lang}/RulesRegulations/Taxes/Pages/Integrated-Tarrifs.aspx`;
+const contactPage = url(`${lang}/about/#contact`);
+const questionLinks = { list: lcgpa, contact: contactPage, tariff };
+function splitEquation(paragraph: string) {
+  return paragraph.split(/(R\(g\) = min\(1, g × \(V − v₁\) \/ v₁\)|min\(1, H \/ v₁\)|V − v₁|v₁)/)
+    .map((chunk, index) => ({ chunk, isolate: index % 2 === 1 }));
+}
+---
+<Layout lang={lang} path={`${section}/`} title={current.title} description={current.intro}>
+  <article class="wrap reading-page secondary-page" itemscope={section === 'questions'} itemtype={section === 'questions' ? 'https://schema.org/FAQPage' : undefined}>
+    <h1>{current.title}</h1>
+    {section !== 'impact' && <p class="lede">{current.intro}</p>}
+
+    {section === 'about' && <>
+      <p>{about[lang].story}</p>
+      <p>{about[lang].independence}</p>
+      <p>{about[lang].ai}</p>
+      <section>
+        <h2>{label('cite')}</h2>
+        <p>{about[lang].cite}</p>
+        <p><a href={absolute(`${lang}/about/`)} rel="noopener noreferrer"><bdi>{absolute(`${lang}/about/`)}</bdi></a></p>
+      </section>
+      <ul>
+        <li>{config.publicRepositoryUrl
+          ? <a href={config.publicRepositoryUrl} rel="noopener noreferrer">{label('repository')}</a>
+          : label('repoPrivate')}</li>
+      </ul>
+      <section id="contact">
+        <h2>{label('contact')}</h2>
+        {publicIssuesUrl && <>
+          <p>{t(lang,'common.publicFeedbackNotice')}</p>
+          <p><a href={publicIssuesUrl} rel="noopener noreferrer">{t(lang,'common.publicFeedbackLink')}</a></p>
+        </>}
+        {config.feedbackFormUrl && <p><a href={config.feedbackFormUrl} rel="noopener noreferrer">{t(lang,'product.correctionForm')}</a></p>}
+        <p>{privateMailUrl
+          ? <a href={privateMailUrl} rel="noopener noreferrer"><bdi>{config.email}</bdi></a>
+          : t(lang,'common.privateContactUnavailable')}</p>
+      </section>
+    </>}
+
+    {section === 'questions' && <>
+      <meta itemprop="inLanguage" content={lang} />
+      {questions[lang].items.map(([question, answer, link]) => <section itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <h2 itemprop="name">{question}</h2>
+        <p itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">{answer}</span> {link && link in questionLinks && <a href={questionLinks[link as keyof typeof questionLinks]} rel="noopener noreferrer">{label(link)}</a>}</p>
+      </section>)}
+    </>}
+
+    {section === 'glossary' && <dl>
+      {glossary[lang].items.map(([term, definition]) => <>
+        <dt>{term}</dt>
+        <dd>{definition}</dd>
+      </>)}
+    </dl>}
+
+    {section === 'impact' && (launchDate
+      ? <p class="lede">{pages[lang].impact.launched} <time datetime={launchDate}><bdi>{launchDate}</bdi></time>. {pages[lang].impact.published}</p>
+      : <p class="lede">{current.intro}</p>)}
+
+    {section === 'changelog' && <section><h2>{label('release')}</h2><p>{pages[lang].changelog.initial}</p></section>}
+
+    {legal && <>
+      {legal.sections.map(item => <section>
+        <h2>{item.title}</h2>
+        {item.body.map(paragraph => <p>{paragraph}</p>)}
+      </section>)}
+      <p>{privateMailUrl
+        ? <a href={privateMailUrl} rel="noopener noreferrer"><bdi>{config.email}</bdi></a>
+        : t(lang,'common.privateContactUnavailable')}</p>
+      {section === 'terms' && <p><a href={contactPage}>{t(lang,'common.corrections')}</a></p>}
+      {section === 'terms' && <section>
+        <h2>{label('thirdPartyLicenses')}</h2>
+        <ul>
+          <li><a href="https://opensource.org/license/mit" rel="noopener noreferrer">{label('mit')}</a></li>
+          <li><a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer">{label('ccby')}</a></li>
+          <li><a href="https://uncomtrade.org/docs/policy-on-comtrade-data-use/" rel="noopener noreferrer">{label('upstream')}</a></li>
+          <li><a href={url('licenses/ibm-plex-sans-OFL-1.1.txt')}>{label('plexLicense')}</a></li>
+          <li><a href={url('licenses/ibm-plex-sans-arabic-OFL-1.1.txt')}>{label('plexArabicLicense')}</a></li>
+          <li><a href={url('licenses/fuse-js-Apache-2.0.txt')}>{label('fuseLicense')}</a></li>
+          <li><a href={url('licenses/fuse-js-notice.txt')}>{label('fuseNotice')}</a></li>
+        </ul>
+      </section>}
+      {section === 'privacy' && <section>
+        <h2>{label('analyticsTitle')}</h2>
+        <p>{label(counterOrigin ? 'analyticsOn' : 'analyticsOff')}</p>
+        {config.feedbackFormUrl && <p>{label('externalForm')} <bdi>{new URL(config.feedbackFormUrl).hostname}</bdi></p>}
+      </section>}
+      {section === 'privacy' && <ul>
+        <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">{label('githubPrivacy')}</a></li>
+        <li><a href="https://dgp.sdaia.gov.sa/wps/portal/pdp/services/ReportsComplaints/" rel="noopener noreferrer">{label('complaint')}</a></li>
+        {privateMailUrl && config.mailProviderPrivacyUrl && <li><a href={config.mailProviderPrivacyUrl} rel="noopener noreferrer">{label('mailProviderPrivacy')}</a></li>}
+        <li><a href="https://sdaia.gov.sa/" rel="noopener noreferrer">{label('regulator')}</a></li>
+      </ul>}
+    </>}
+
+    {section === 'methods' && <>
+      {method.sections.map(item => <section>
+        <p class="eyebrow">{label(item.type)}</p>
+        <h2>{item.title}</h2>
+        {item.body.map(paragraph => <p>{splitEquation(paragraph).map(({ chunk, isolate }) => {
+          return isolate ? <bdi dir="ltr">{chunk}</bdi> : chunk;
+        })}</p>)}
+        {item.source === 'trade' && <p class="source-note">
+          {sourceDates.length ? <>{label('retrieved')} {sourceDates.map((date, i) => <>{i > 0 && ', '}<bdi><time datetime={date!}>{date}</time></bdi></>)} · </> : <>{label('pending')} · </>}
+          <a href={tradeUrl} rel="noopener noreferrer">{label('dataSource')}</a>
+          · <a href={classification} rel="noopener noreferrer">{label('classificationSource')}</a>
+        </p>}
+        {item.source === 'trade' && <p class="source-note">
+          {label('guidelinesDate')} <bdi><time datetime="2026-11-18">2026-11-18</time></bdi> · <a href={tariff} rel="noopener noreferrer">{label('tariff')}</a>
+        </p>}
+        {item.source === 'list' && <p class="source-note"><a href={lcgpa} rel="noopener noreferrer">{label('list')}</a></p>}
+        {item.source === 'guidelines' && <p class="source-note">{label('guidelinesDate')} <bdi><time datetime="2026-11-18">2026-11-18</time></bdi> · <a href={guideline} rel="noopener noreferrer">{label('guidelinesSource')}</a></p>}
+      </section>)}
+      <WorkedExample lang={lang} />
+      <a class="touch-link" href={url('indicators.csv')} download>{t(lang,'browse.download')}</a>
+      <p>{label('versionNote')} <a href={url('source-fingerprints.csv')} download>{label('fingerprints')}</a></p>
+      <p class="source-note">{label('snapshot')} · <code dir="ltr">{checksum}</code></p>
+      <section>
+        <p class="eyebrow">{label('calculated')}</p>
+        <h2>{method.sensitivity}</h2>
+        <p>{method.sensitivityIntro} {label('ties')}</p>
+        {sensitivity?.correlations.some(comparison => comparison.count >= 2) ? <>
+          {sensitivity.assumption_stability && <p>{sensitivity.assumption_stability === 'stable' ? method.sensitivityStable : method.sensitivityDepends}</p>}
+          <div class="table-scroll" role="region" tabindex="0" aria-label={method.sensitivity}>
+            <table class="methods-table" aria-label={method.sensitivity}>
+              <thead><tr><th scope="col">{label('left')}</th><th scope="col">{label('right')}</th><th scope="col">{label('correlation')}</th><th scope="col">{label('productsCompared')}</th></tr></thead>
+              <tbody>
+                {sensitivity.correlations.map(comparison => <tr>
+                  <th scope="row">{ranking(comparison.left)}</th><td>{ranking(comparison.right)}</td><td><bdi>{comparison.rho?.toFixed(3) ?? label('suppressed')}</bdi></td><td><bdi>{comparison.count}</bdi></td>
+                </tr>)}
+              </tbody>
+            </table>
+          </div>
+          {(sensitivity.most_moved.scenario.length > 0 || sensitivity.most_moved.hhi.length > 0) && <p>{label('rankScope')}</p>}
+          {(['scenario', 'hhi'] as const).map(group => {
+            const movers = sensitivity.most_moved[group];
+            return movers.length > 0 && <>
+              <h3>{group === 'scenario' ? method.scenarioMovers : method.hhiMovers}</h3>
+              <ul>
+                {movers.map(mover => <li><a href={url(`${lang}/product/${mover.hs6}/`)}>{products.find(product => product.hs6 === mover.hs6)?.name[lang] ?? <bdi>{mover.hs6}</bdi>}</a> · <bdi>{mover.change}</bdi> {label('rankPlaces')}</li>)}
+              </ul>
+            </>;
+          })}
+          <p class="source-note">{label('retrieved')} <bdi>{sourceDates.join(', ')}</bdi> · <a href={tradeUrl} rel="noopener noreferrer">{label('dataSource')}</a></p>
+        </> : <p class="notice">{label('pending')}</p>}
+      </section>
+      <section>
+        <h2>{method.version}</h2>
+        <p>{method.versionText}</p>
+      </section>
+    </>}
+  </article>
+</Layout>
+<style>
+  .secondary-page {
+    max-inline-size: 76ch;
+    padding-block: 2rem 4rem;
+    overflow-wrap: anywhere;
+  }
+  .secondary-page section { margin-block-start: 2rem; }
+  .secondary-page .eyebrow { margin-block-end: 0.5rem; }
+  .secondary-page .eyebrow:has(+ h2) + h2 { margin-block-start: 0; }
+  dt { font-weight: 650; margin-block-start: 1rem; }
+  dd { margin-inline-start: 0; }
+</style>

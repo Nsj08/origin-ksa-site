@@ -1,0 +1,229 @@
+---
+import { t, type Language } from '../lib/ui';
+import {url} from '../lib/site';
+import '../styles/search.css';
+interface Props { lang: Language; examples?: boolean }
+const {lang, examples} = Astro.props;
+const keys = ['ball', 'submersible', 'check', 'safety', 'centrifugal', 'parts'];
+const browse = url(`${lang}/browse/`);
+---
+<origin-search
+  data-lang={lang}
+  data-index={url('search-index.json')}
+  data-fit={t(lang,'search.fit')}
+  data-group={t(lang,'search.group')}
+  data-note={t(lang,'search.note')}
+  data-water={t(lang,'search.water')}
+  data-empty-copy={t(lang,'search.empty')}
+  data-count={t(lang,'search.count')}
+  data-browse={browse}
+>
+  <form class="search" role="search" action={browse} method="get">
+    <label for="product-search">{t(lang,'search.label')}</label>
+    <div class="search-field">
+      <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+      <input type="search" id="product-search" dir="auto" autocomplete="off" placeholder={t(lang,'search.placeholder')} />
+      <button class="search-submit" type="submit">{t(lang,'search.action')}</button>
+    </div>
+    <div class="search-results" data-panel hidden>
+      <ul role="listbox" id="product-search-results" aria-label={t(lang,'search.count')} hidden></ul>
+      <div class="search-message" data-loading hidden>{t(lang,'search.loading')}</div>
+      <div class="search-message" data-empty hidden>
+        <p>{t(lang,'search.empty')}</p>
+        <a class="touch-link" href={`${browse}?family=pumps`}>{t(lang,'common.pumps')}</a>
+        <a class="touch-link" href={`${browse}?family=valves`}>{t(lang,'common.valves')}</a>
+        <a class="touch-link" href={url(`${lang}/about/#contact`)}>{t(lang,'common.request')}</a>
+      </div>
+      <div class="search-message" data-error hidden>
+        <p>{t(lang,'search.error')}</p><a class="touch-link" href={browse}>{t(lang,'common.browse')}</a>
+      </div>
+    </div>
+    <p class="visually-hidden" aria-live="polite" aria-atomic="true" data-announcement></p>
+    <noscript>
+      <div class="family-links">
+        <a class="touch-link" href={browse + '#pumps'}>{t(lang,'common.pumps')}</a>
+        <a class="touch-link" href={browse + '#valves'}>{t(lang,'common.valves')}</a>
+      </div>
+    </noscript>
+    {examples && <div class="example-links" role="group" aria-label={t(lang,'home.examples')} data-examples hidden>
+      {keys.map((key) => <button type="button">{t(lang,`search.example.${key}`)}</button>)}
+    </div>}
+  </form>
+</origin-search>
+<script>
+  import Fuse from 'fuse.js';
+  import { isGenericWaterPump, normalizeSearchQuery } from '../lib/search-normalize';
+  type Entry = { term: string; normalized: string; lang: string; hs6: string; names: { en: string; ar: string }; hrefs: { en: string; ar: string }; isAlias: boolean };
+  class OriginSearch extends HTMLElement {
+    connectedCallback() {
+      const form = this.querySelector('form')!;
+      const input = this.querySelector('input')!;
+      const list = this.querySelector<HTMLUListElement>('[role="listbox"]')!;
+      const panel = this.querySelector<HTMLElement>('[data-panel]')!;
+      const loading = this.querySelector<HTMLElement>('[data-loading]')!;
+      const empty = this.querySelector<HTMLElement>('[data-empty]')!;
+      const error = this.querySelector<HTMLElement>('[data-error]')!;
+      const announcement = this.querySelector<HTMLElement>('[data-announcement]')!;
+      const lang = this.dataset.lang === 'ar' ? 'ar' : 'en';
+      let selected = -1;
+      let current = 0;
+      let links: HTMLAnchorElement[] = [];
+      let index: Promise<Fuse<Entry>> | undefined;
+
+      input.dir = input.value ? 'auto' : lang === 'ar' ? 'rtl' : 'ltr';
+      input.setAttribute('role', 'combobox');
+      input.setAttribute('aria-controls', list.id);
+      input.setAttribute('aria-autocomplete', 'list');
+      input.setAttribute('aria-expanded', 'false');
+
+      function select(position: number) {
+        links.forEach((link, n) => link.setAttribute('aria-selected', String(n === position)));
+        selected = position;
+        if (selected < 0) {
+          input.removeAttribute('aria-activedescendant');
+          return;
+        }
+        const active = links[selected];
+        input.setAttribute('aria-activedescendant', active.id);
+        active.scrollIntoView({ block: 'nearest' });
+      }
+
+      function close() {
+        current += 1;
+        panel.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        select(-1);
+      }
+
+      function reset() {
+        list.replaceChildren();
+        links = [];
+        select(-1);
+        list.hidden = loading.hidden = empty.hidden = error.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+      }
+
+      const getIndex = () => index ??= fetch(this.dataset.index!).then(async (response) => {
+        if (!response.ok) throw new Error('Search index unavailable');
+        const entries: Entry[] = await response.json();
+        return new Fuse(entries, { keys: ['normalized'], threshold: .36, ignoreLocation: true });
+      }).catch((cause) => {
+        index = undefined;
+        throw cause;
+      });
+
+      const search = async () => {
+        input.dir = input.value ? 'auto' : lang === 'ar' ? 'rtl' : 'ltr';
+        const query = normalizeSearchQuery(input.value);
+        const request = ++current;
+        reset();
+        if (!query) {
+          close();
+          announcement.textContent = '';
+          return;
+        }
+        panel.hidden = false;
+        const ambiguous = isGenericWaterPump(query);
+        empty.querySelector('p')!.textContent = ambiguous ? this.dataset.water! : this.dataset.emptyCopy!;
+        if (ambiguous) {
+          empty.hidden = false;
+          announcement.textContent = this.dataset.water!;
+          return;
+        }
+        loading.hidden = false;
+        announcement.textContent = loading.textContent;
+        try {
+          const fuse = await getIndex();
+          if (request !== current) return;
+          loading.hidden = true;
+          const raw = fuse.search(query);
+          const exact = raw.filter(({item}) => item.normalized === query);
+          const used = new Set<string>();
+          const matches = [];
+          for (const {item} of exact.length ? exact : raw) {
+            if (!used.has(item.hs6)) {
+              matches.push(item);
+              used.add(item.hs6);
+            }
+            if (matches.length === 8) break;
+          }
+          for (const item of matches) {
+            const li = document.createElement('li');
+            const anchor = document.createElement('a');
+            const primary = document.createElement('strong');
+            const secondary = document.createElement('span');
+            primary.dir = 'auto';
+            primary.lang = item.isAlias ? item.lang : lang;
+            primary.textContent = item.isAlias ? item.term : item.names[lang];
+            secondary.textContent = item.isAlias
+              ? `${this.dataset.group}: ${item.names[lang]} (${item.hs6}). ${this.dataset.note}`
+              : item.hs6;
+            if (item.hs6 === '841370' && item.isAlias) secondary.textContent += ' ' + this.dataset.fit;
+            anchor.href = item.hrefs[lang];
+            anchor.id = `product-result-${item.hs6}`;
+            anchor.setAttribute('role','option');
+            anchor.setAttribute('aria-selected','false');
+            anchor.tabIndex = -1;
+            li.setAttribute('role','presentation');
+            anchor.append(primary, secondary);
+            li.append(anchor);
+            list.append(li);
+            links.push(anchor);
+          }
+          list.hidden = links.length === 0;
+          empty.hidden = links.length > 0;
+          input.setAttribute('aria-expanded', String(links.length > 0));
+          announcement.textContent = links.length ? `${this.dataset.count}: ${links.length}` : empty.querySelector('p')!.textContent;
+        } catch {
+          if (request !== current) return;
+          loading.hidden = true;
+          error.hidden = false;
+          announcement.textContent = error.querySelector('p')!.textContent;
+        }
+      };
+
+      input.addEventListener('input', () => void search());
+      input.addEventListener('focus', () => { if (input.value) void search(); });
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          if (!panel.hidden) event.preventDefault();
+          close();
+        }
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          if (panel.hidden) {
+            void search().then(() => { if (links.length && !panel.hidden) select(event.key === 'ArrowDown' ? 0 : links.length - 1); });
+          } else if (links.length) {
+            const direction = event.key === 'ArrowDown' ? 1 : -1;
+            select(selected < 0 && direction === -1 ? links.length - 1 : (selected + direction + links.length) % links.length);
+          }
+        }
+      });
+      form.addEventListener('submit', (event) => {
+        if (input.value.trim()) {
+          event.preventDefault();
+          if (!panel.hidden && links.length) (links[selected] ?? links[0]).click();
+          else void search().then(() => { if (links.length && !panel.hidden) links[0].click(); });
+        }
+      });
+      this.addEventListener('focusout', (event) => {
+        if (event.relatedTarget instanceof Node && !this.contains(event.relatedTarget)) close();
+      });
+      document.addEventListener('pointerdown', (event) => {
+        if (event.target instanceof Node && !this.contains(event.target)) close();
+      });
+      const examples = this.querySelector<HTMLElement>('[data-examples]');
+      if (examples) {
+        examples.hidden = false;
+        examples.addEventListener('click', (event) => {
+          if (event.target instanceof HTMLButtonElement) {
+            input.value = event.target.textContent ?? '';
+            if (document.activeElement !== input) input.focus();
+            else void search();
+          }
+        });
+      }
+    }
+  }
+  if (!customElements.get('origin-search')) customElements.define('origin-search', OriginSearch);
+</script>

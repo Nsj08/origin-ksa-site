@@ -1,0 +1,233 @@
+[
+  {
+    "hs6": "841311",
+    "en": [
+      "fuel dispensing pump",
+      "fuel dispenser",
+      "petrol dispenser"
+    ],
+    "ar": [
+      "مضخة توزيع الوقود",
+      "مضخة محطة الوقود",
+      "موزع الوقود"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841319",
+    "en": [
+      "liquid metering pump with measuring device",
+      "liquid pump with flow meter"
+    ],
+    "ar": [
+      "مضخة سوائل مزودة بعداد",
+      "مضخة مزودة بجهاز قياس"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841320",
+    "en": [
+      "hand pump",
+      "manual liquid pump"
+    ],
+    "ar": [
+      "مضخة يدوية",
+      "مضخة سوائل تعمل باليد"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841330",
+    "en": [
+      "engine oil pump",
+      "engine coolant pump",
+      "piston engine fuel pump"
+    ],
+    "ar": [
+      "مضخة زيت المحرك",
+      "مضخة تبريد المحرك",
+      "مضخة وقود لمحرك مكبسي"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841340",
+    "en": [
+      "concrete pump",
+      "ready mix concrete pump"
+    ],
+    "ar": [
+      "مضخة خرسانة",
+      "مضخة خرسانة جاهزة"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841350",
+    "en": [
+      "reciprocating pump",
+      "piston pump",
+      "plunger pump",
+      "diaphragm pump"
+    ],
+    "ar": [
+      "مضخة ترددية",
+      "مضخة مكبس",
+      "مضخة غشائية"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841360",
+    "en": [
+      "rotary positive displacement pump",
+      "gear pump",
+      "screw pump",
+      "lobe pump"
+    ],
+    "ar": [
+      "مضخة إزاحة موجبة دوارة",
+      "مضخة تروس",
+      "مضخة لولبية",
+      "مضخة فصية"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "841370",
+    "en": [
+      "centrifugal pump",
+      "centrifugal submersible pump",
+      "centrifugal fire pump",
+      "centrifugal booster pump",
+      "submersible pump",
+      "fire pump",
+      "fire pumps",
+      "submersible pumps"
+    ],
+    "ar": [
+      "مضخة طرد مركزي",
+      "مضخة غاطسة بالطرد المركزي",
+      "مضخة حريق بالطرد المركزي",
+      "مضخة تعزيز ضغط بالطرد المركزي",
+      "مضخة غاطسة",
+      "مضخة حريق",
+      "مضخات الحريق",
+      "مضخات غاطسة",
+      "مضخات إطفاء الحريق",
+      "غطاس",
+      "مضخة غطاس",
+      "طرمبة غاطسة"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en The unqualified phrases submersible pump and fire pump are search hints for centrifugal models only, not universal classifications."
+  },
+  {
+    "hs6": "841391",
+    "en": [
+      "pump parts",
+      "liquid pump parts",
+      "centrifugal pump impeller"
+    ],
+    "ar": [
+      "قطع غيار مضخات",
+      "أجزاء مضخات السوائل",
+      "دفاعة مضخة طرد مركزي"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "848110",
+    "en": [
+      "pressure reducing valve",
+      "pressure reducing regulator"
+    ],
+    "ar": [
+      "صمام تخفيض الضغط",
+      "صمام خفض الضغط"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "848120",
+    "en": [
+      "hydraulic transmission valve",
+      "pneumatic transmission valve"
+    ],
+    "ar": [
+      "صمام نقل حركة هيدروليكي",
+      "صمام نقل حركة هوائي"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "848130",
+    "en": [
+      "check valve",
+      "non-return valve",
+      "nonreturn valve",
+      "one-way valve"
+    ],
+    "ar": [
+      "صمام عدم رجوع",
+      "صمام لا رجعي",
+      "صمام اتجاه واحد"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "848140",
+    "en": [
+      "safety valve",
+      "relief valve",
+      "pressure relief valve"
+    ],
+    "ar": [
+      "صمام أمان",
+      "صمام تنفيس",
+      "صمام تنفيس الضغط"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "848180",
+    "en": [
+      "ball valve",
+      "ball valves",
+      "gate valve",
+      "globe valve",
+      "butterfly valve",
+      "plug valve",
+      "stopcock",
+      "faucet",
+      "water tap"
+    ],
+    "ar": [
+      "صمام كروي",
+      "صمامات كروية",
+      "محبس كروي",
+      "محابس كروية",
+      "صمام بوابة",
+      "صمام غلوب",
+      "صمام فراشة",
+      "صمام سدادي",
+      "محبس",
+      "حنفية",
+      "صنبور"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  },
+  {
+    "hs6": "848190",
+    "en": [
+      "valve parts",
+      "valve body"
+    ],
+    "ar": [
+      "قطع غيار صمامات",
+      "أجزاء الصمامات",
+      "جسم الصمام"
+    ],
+    "source": "HS 2022 headings and subheadings, WCO Chapter 84; search hints follow the described operating principle or function. Confirm the precise customs classification from the product specification. https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1684_2022e.pdf?la=en"
+  }
+]

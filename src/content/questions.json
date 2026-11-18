@@ -1,0 +1,116 @@
+{
+  "en": {
+    "title": "Questions and answers",
+    "intro": "Quick answers about product groups, Saudi makers, imports and the national list.",
+    "items": [
+      [
+        "What is an HS code?",
+        "It is a customs code for a type or group of goods. The site uses the first six digits shared internationally under the Harmonized System. For a Saudi customs declaration, confirm the exact 12-digit tariff item with ZATCA.",
+        "tariff"
+      ],
+      [
+        "Why do several types of valve share one page?",
+        "Customs combines some designs under one code. A ball valve and a gate valve can belong to the same group, and the trade figures cover that entire group."
+      ],
+      [
+        "What is the national products list?",
+        "The Local Content and Government Procurement Authority publishes the Mandatory List of National Products. For a specific purchase, check the exact item in the current official document and read the tender requirements for eligibility and proof.",
+        "list"
+      ],
+      [
+        "Why might a Saudi maker be missing?",
+        "A maker may lack a public source specific enough to verify, or the entry may be waiting for review. Confirm manufacturing and the exact model directly with the company."
+      ],
+      [
+        "Does a Saudi maker entry establish Saudi origin?",
+        "An entry tells you what a public source says the company manufactures in Saudi Arabia. To establish the origin of a specific model, ask for the documentation required under the applicable rules."
+      ],
+      [
+        "Can I use the site to calculate a local-content score or qualify for a tender?",
+        "The score follows the applicable local-content methodology. Tender eligibility depends on the buyer’s terms and the proof it asks for. Use the tender documents to check both."
+      ],
+      [
+        "How often do trade figures update?",
+        "We show the most recent available annual figures returned when the data is refreshed. There is no fixed refresh schedule. Each product page shows its reporting year and retrieval date when available."
+      ],
+      [
+        "Is Origin KSA official?",
+        "Origin KSA is an independent student project. Use the original agencies and sources to confirm details before making decisions."
+      ],
+      [
+        "Does a high label mean a supply interruption is likely?",
+        "High means a large share of Saudi imports comes from one or a few countries. The label describes the mix of reported imports."
+      ],
+      [
+        "Can I tell what share of Saudi demand is met by imports?",
+        "That would require domestic production and demand information for the same products. The trade figures here only cover imports."
+      ],
+      [
+        "Can other countries really cover the gap if imports stop?",
+        "The figures illustrate what would happen if other suppliers increased shipments by the amounts assumed. Ask suppliers about capacity, specifications, prices and delivery."
+      ],
+      [
+        "How do I request a product or report a correction?",
+        "Use the contact link. Include the product name, the page URL if there is one, and a public source if you have one.",
+        "contact"
+      ]
+    ]
+  },
+  "ar": {
+    "title": "أسئلة وأجوبة",
+    "intro": "إجابات مختصرة عن فئات المنتجات والمصنّعين السعوديين والواردات والقائمة الإلزامية.",
+    "items": [
+      [
+        "ما الرمز الجمركي؟",
+        "هو رمز تستخدمه الجمارك لتصنيف نوع أو فئة من السلع. يستخدم الموقع أول ست خانات من النظام المنسق، وهي مشتركة دوليًا. وللتصريح الجمركي في السعودية، تحقّق من البند المحدد المكوّن من 12 خانة في تعريفة هيئة الزكاة والضريبة والجمارك.",
+        "tariff"
+      ],
+      [
+        "لماذا تظهر أنواع مختلفة من الصمامات في صفحة واحدة؟",
+        "تجمع الجمارك بعض التصاميم تحت رمز واحد. قد يقع الصمام الكروي والصمام البوابي في الفئة نفسها، وتشمل الأرقام الفئة كاملة."
+      ],
+      [
+        "ما القائمة الإلزامية للمنتجات الوطنية؟",
+        "تنشر هيئة المحتوى المحلي والمشتريات الحكومية القائمة الإلزامية للمنتجات الوطنية. عند الشراء، تحقّق من وصف الصنف المحدد في الوثيقة الرسمية السارية، وراجع شروط الأهلية ومتطلبات الإثبات في وثائق المنافسة.",
+        "list"
+      ],
+      [
+        "لماذا قد يغيب مصنّع سعودي عن الموقع؟",
+        "قد لا يتوفر مصدر منشور يحدد ما يصنّعه بدقة، أو يكون السجل بانتظار المراجعة. تحقّق من التصنيع والطراز المطلوب مباشرةً مع الشركة."
+      ],
+      [
+        "هل يثبت إدراج مصنّع سعودي أن منشأ المنتج سعودي؟",
+        "يوضح السجل ما يفيد به مصدر منشور عن المنتجات التي تصنعها الشركة في السعودية. ولإثبات منشأ طراز محدد، اطلب المستندات المطلوبة وفق القواعد المطبقة."
+      ],
+      [
+        "هل يحسب الموقع درجة المحتوى المحلي أو يحدد أهليتي للمنافسة؟",
+        "تُحسب الدرجة وفق منهجية المحتوى المحلي المطبقة. وتعتمد أهلية المشاركة على شروط الجهة المشترية والإثباتات التي تطلبها. راجع وثائق المنافسة للتحقق من الأمرين."
+      ],
+      [
+        "كم مرة تُحدَّث أرقام الواردات؟",
+        "نعرض أحدث أرقام سنوية متاحة عند جلب البيانات. لا يوجد جدول ثابت للتحديث. تعرض صفحة المنتج سنة البيانات وتاريخ جلبها عند توفرهما."
+      ],
+      [
+        "هل منشأ موقع رسمي؟",
+        "منشأ مشروع طلابي مستقل. ارجع إلى الجهات والمصادر الأصلية للتحقق قبل اتخاذ أي قرار."
+      ],
+      [
+        "هل تعني درجة التركز المرتفعة أن انقطاع التوريد مرجّح؟",
+        "تعني الدرجة المرتفعة أن حصة كبيرة من واردات السعودية تأتي من بلد واحد أو بضعة بلدان. تصف الدرجة توزيع الواردات المبلّغ عنها."
+      ],
+      [
+        "هل يمكن معرفة نسبة الطلب التي تغطيها الواردات؟",
+        "يتطلب ذلك بيانات عن الإنتاج المحلي والطلب على المنتجات نفسها. الأرقام المتاحة هنا تخص الواردات فقط."
+      ],
+      [
+        "هل تستطيع البلدان الأخرى سد الفجوة إذا توقفت الواردات؟",
+        "توضح الأرقام ما قد يحدث إذا زادت الشحنات بالمقادير المفترضة. اسأل الموردين عن طاقتهم ومواصفات منتجاتهم وأسعارهم ومدد التوريد."
+      ],
+      [
+        "كيف أطلب إضافة منتج أو أبلغ عن خطأ؟",
+        "استخدم رابط التواصل وأرفق اسم المنتج ورابط الصفحة إن وُجد ومصدرًا منشورًا إن توفر.",
+        "contact"
+      ]
+    ]
+  }
+}

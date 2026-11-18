@@ -1,0 +1,10 @@
+{
+  "makerConfirmed": {"en":"Contact the maker to confirm it manufactures the model you need and can supply it to your specifications.","ar":"تواصل مع المصنّع للتأكد من أنه يصنع الطراز المطلوب ويستطيع توريده وفق مواصفاتك."},
+  "makerPending": {"en":"Ask suppliers whether they manufacture the required model in Saudi Arabia and request the manufacturer’s datasheet and the factory location for that exact model. For a tender, check which proof of origin the buyer accepts.","ar":"اسأل الموردين إن كانوا يصنعون الطراز المطلوب في السعودية، واطلب ورقة مواصفات الطراز وبيانات المصنع الذي ينتجه. وفي المنافسات، تحقّق من إثبات المنشأ الذي تقبله الجهة المشترية."},
+  "imports": {"en":"The figures cover the whole product group. A particular model may come from different countries.","ar":"تشمل الأرقام فئة المنتجات كاملة. وقد تختلف بلدان التوريد لطراز بعينه."},
+  "risk": {"en":"If most imports come from one country, ask suppliers what alternatives meet your specifications and lead time.","ar":"إذا كانت معظم الواردات تأتي من بلد واحد، فاسأل الموردين عن البدائل التي تلبي المواصفات وموعد التسليم."},
+  "listConfirmed": {"en":"Check the current official list and your tender documents for the exact product, scope and requirements.","ar":"راجع أحدث قائمة رسمية ووثائق منافستك للتحقق من المنتج المحدد ونطاق التطبيق والمتطلبات."},
+  "listPending": {"en":"Check the current official list for the exact product description before relying on a list status for a tender.","ar":"راجع أحدث قائمة رسمية للتحقق من الوصف الدقيق للمنتج قبل الاعتماد على حالة إدراجه في منافسة."},
+  "scenario": {"en":"The increases in import value are assumptions. The illustration leaves out prices, quality, certification, lead times, contracts and differences between products in the group.","ar":"الزيادة في قيمة الواردات افتراض للتوضيح. ولا يدخل في الحساب السعر أو الجودة أو الشهادات أو مدد التوريد أو العقود أو اختلاف المنتجات داخل الفئة."},
+  "notes": {"en":"We have no domestic production volumes, so we cannot calculate what share of Saudi demand is met by imports.","ar":"لا تتوفر لدينا كميات الإنتاج المحلي، لذلك لا يمكننا حساب نسبة الطلب في السعودية التي تغطيها الواردات."}
+}

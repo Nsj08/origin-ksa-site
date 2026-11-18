@@ -23,11 +23,11 @@
       ],
       [
         "Does a Saudi maker entry establish Saudi origin?",
-        "An entry tells you what a public source says the company manufactures in Saudi Arabia. To establish the origin of a specific model, ask for the documentation required under the applicable rules."
+        "No. An entry tells you what a public source says the company manufactures in Saudi Arabia. To establish the origin of a specific model, ask for the documentation required under the applicable rules."
       ],
       [
         "Can I use the site to calculate a local-content score or qualify for a tender?",
-        "The score follows the applicable local-content methodology. Tender eligibility depends on the buyer’s terms and the proof it asks for. Use the tender documents to check both."
+        "No. The score follows the applicable local-content methodology, and tender eligibility depends on the buyer's terms and the proof it asks for. Use the tender documents to check both."
       ],
       [
         "How often do trade figures update?",
@@ -39,15 +39,15 @@
       ],
       [
         "Does a high label mean a supply interruption is likely?",
-        "High means a large share of Saudi imports comes from one or a few countries. The label describes the mix of reported imports."
+        "No. High means a large share of Saudi imports comes from one or a few countries. The label describes the mix of reported imports and says nothing about how likely an interruption is."
       ],
       [
         "Can I tell what share of Saudi demand is met by imports?",
-        "That would require domestic production and demand information for the same products. The trade figures here only cover imports."
+        "No. That would need domestic production and demand figures for the same products, and the trade figures here cover imports only."
       ],
       [
         "Can other countries really cover the gap if imports stop?",
-        "The figures illustrate what would happen if other suppliers increased shipments by the amounts assumed. Ask suppliers about capacity, specifications, prices and delivery."
+        "The site can't tell you that. The figures show what would happen if other suppliers increased shipments by the amounts assumed. Ask suppliers about capacity, specifications, prices and delivery."
       ],
       [
         "How do I request a product or report a correction?",
@@ -80,11 +80,11 @@
       ],
       [
         "هل يثبت إدراج مصنّع سعودي أن منشأ المنتج سعودي؟",
-        "يوضح السجل ما يفيد به مصدر منشور عن المنتجات التي تصنعها الشركة في السعودية. ولإثبات منشأ طراز محدد، اطلب المستندات المطلوبة وفق القواعد المطبقة."
+        "لا. يوضح السجل ما يفيد به مصدر منشور عن المنتجات التي تصنعها الشركة في السعودية. ولإثبات منشأ طراز محدد، اطلب المستندات المطلوبة وفق القواعد المطبقة."
       ],
       [
         "هل يحسب الموقع درجة المحتوى المحلي أو يحدد أهليتي للمنافسة؟",
-        "تُحسب الدرجة وفق منهجية المحتوى المحلي المطبقة. وتعتمد أهلية المشاركة على شروط الجهة المشترية والإثباتات التي تطلبها. راجع وثائق المنافسة للتحقق من الأمرين."
+        "لا. تُحسب الدرجة وفق منهجية المحتوى المحلي المطبقة، وتعتمد أهلية المشاركة على شروط الجهة المشترية والإثباتات التي تطلبها. راجع وثائق المنافسة للتحقق من الأمرين."
       ],
       [
         "كم مرة تُحدَّث أرقام الواردات؟",
@@ -96,15 +96,15 @@
       ],
       [
         "هل تعني درجة التركز المرتفعة أن انقطاع التوريد مرجّح؟",
-        "تعني الدرجة المرتفعة أن حصة كبيرة من واردات السعودية تأتي من بلد واحد أو بضعة بلدان. تصف الدرجة توزيع الواردات المبلّغ عنها."
+        "لا. تعني الدرجة المرتفعة أن حصة كبيرة من واردات السعودية تأتي من بلد واحد أو بضعة بلدان. تصف الدرجة توزيع الواردات المبلّغ عنها، ولا تدل على مدى احتمال انقطاع التوريد."
       ],
       [
         "هل يمكن معرفة نسبة الطلب التي تغطيها الواردات؟",
-        "يتطلب ذلك بيانات عن الإنتاج المحلي والطلب على المنتجات نفسها. الأرقام المتاحة هنا تخص الواردات فقط."
+        "لا. يتطلب ذلك بيانات عن الإنتاج المحلي والطلب على المنتجات نفسها، والأرقام المتاحة هنا تخص الواردات فقط."
       ],
       [
         "هل تستطيع البلدان الأخرى سد الفجوة إذا توقفت الواردات؟",
-        "توضح الأرقام ما قد يحدث إذا زادت الشحنات بالمقادير المفترضة. اسأل الموردين عن طاقتهم ومواصفات منتجاتهم وأسعارهم ومدد التوريد."
+        "لا يستطيع الموقع الإجابة عن ذلك. توضح الأرقام ما قد يحدث إذا زادت شحنات الموردين الآخرين بالمقادير المفترضة. اسأل الموردين عن طاقتهم ومواصفات منتجاتهم وأسعارهم ومدد التوريد."
       ],
       [
         "كيف أطلب إضافة منتج أو أبلغ عن خطأ؟",

@@ -7,7 +7,7 @@
     },
     "impact": {
       "title": "Impact",
-      "intro": "The site is in pre-launch review. If the owner starts measuring use after launch, this page can show verified figures.",
+      "intro": "Verified figures on the use of Origin KSA will appear here when available.",
       "published": "First verified figures will appear here.",
       "launched": "Launched"
     }
@@ -20,7 +20,7 @@
     },
     "impact": {
       "title": "الأثر",
-      "intro": "الموقع قيد المراجعة قبل إطلاقه. إذا بدأ المالك قياس الاستخدام بعد الإطلاق، يمكن نشر الأرقام هنا بعد التحقق منها.",
+      "intro": "تُعرض هنا أرقام استخدام منشأ عند توفر بيانات يمكن التحقق منها.",
       "published": "ستظهر هنا أول أرقام جرى التحقق منها.",
       "launched": "تاريخ الإطلاق"
     }

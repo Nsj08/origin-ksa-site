@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "@napi-rs/canvas": "0.1.100",
+    "@napi-rs/canvas": "1.2.0",
     "@playwright/test": "1.65.1",
     "@types/node": "24.19.2",
     "esbuild": "0.28.2",
